@@ -6,23 +6,35 @@ import frc.robot.subsystems.ShooterSubsystem;
 
 public class ShooterPIDCmd extends Command{
     private ShooterSubsystem shooterSub;
-    private int setpoint; 
+    private double setpoint; 
+    private double servopoint;
+    PIDController controller;
 
-    public ShooterPIDCmd (ShooterSubsystem shooterSub, int setpoint) {
+    public ShooterPIDCmd (ShooterSubsystem shooterSub, double setpoint) {
         this.shooterSub = shooterSub;
         this.setpoint = setpoint;
-        PIDController controller = new PIDController(setpoint, setpoint, setpoint);
+
+        // TODO set these up so that like they are real values and not just 1
+        controller = new PIDController(1, 0, 0);
         // can't remember what else goes here for now
+        // you got it all pmuch
     }
+
+       public ShooterPIDCmd (ShooterSubsystem shooterSub, double setpoint, double servopoint) {
+        this.shooterSub = shooterSub;
+        this.setpoint = setpoint;
+        this.servopoint = servopoint;
+       }
 
     @Override
     public void initialize() {
-
+            controller.setSetpoint(setpoint);
+            shooterSub.setServo(servopoint);
     }
 
     @Override
     public void execute() {
-        shooterSub.setPIDSpeed(setpoint); // replace it with the math thingy later
+        shooterSub.setSpeed(controller.calculate(shooterSub.getPos())); // replace it with the math thingy later
     }
 
     @Override

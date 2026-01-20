@@ -5,10 +5,13 @@
 package frc.robot;
 
 import choreo.auto.AutoFactory;
+import edu.wpi.first.math.MathUtil;
 import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.Commands;
 import edu.wpi.first.wpilibj2.command.RunCommand;
+import edu.wpi.first.wpilibj2.command.button.JoystickButton;
+import frc.robot.Constants.OIConstants;
 import frc.robot.subsystems.Drivesubsystem;
 
 public class RobotContainer {
@@ -49,9 +52,38 @@ public class RobotContainer {
         driver.getRawButton(6)) , driveSub));
   }
 
-  private void configureBindings() {}
+  private void configureBindings() {
+       new JoystickButton(driver, 2).whileTrue(new RunCommand(() -> driveSub.drive(
+      -MathUtil.applyDeadband(driver.getLeftY()/slow, OIConstants.kDriveDeadband),
+      -MathUtil.applyDeadband(driver.getLeftX()/slow, OIConstants.kDriveDeadband),
+         -(LimelightHelpers.getTX("")+0) * 0.015, false), driveSub));
+
+    new JoystickButton(driver, 3).whileTrue(new RunCommand(() -> driveSub.drive(
+     getTY(-2,-0.05),
+      -MathUtil.applyDeadband(driver.getLeftX()/slow, OIConstants.kDriveDeadband), 
+      getTX(0, 0.015), 
+        false
+      )));
+  }
 
   public Command getAutonomousCommand() {
     return Commands.print("No autonomous command configured");
+  }
+
+  
+  public double getTY(double offset, double scale){
+    if(LimelightHelpers.getFiducialID("") == -1){
+      return LimelightHelpers.getTY("");
+    } else {
+      return (LimelightHelpers.getTY("")+offset) * scale;
+    }
+  }
+
+  public double getTX(double offset, double scale){
+    if(LimelightHelpers.getFiducialID("") == -1){
+      return LimelightHelpers.getTX("");
+    } else {
+      return  -(LimelightHelpers.getTX("")+offset) * scale ;
+    }
   }
 }

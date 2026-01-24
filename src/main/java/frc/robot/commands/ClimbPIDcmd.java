@@ -6,13 +6,30 @@ import frc.robot.subsystems.ClimbSubsystem;
 
 public class ClimbPIDcmd extends Command{
 
-    ClimbSubsystem climbSubsystem;
+    ClimbSubsystem climbSub;
     float setpoint;
+    PIDController controller;
 
-    public ClimbPIDcmd(ClimbSubsystem climbSubsystem, float setpoint){
-        this.climbSubsystem = climbSubsystem;
+    public ClimbPIDcmd(ClimbSubsystem climbSub, float setpoint){
+        this.climbSub = climbSub;
         this.setpoint = setpoint;
-        PIDController controller = new PIDController(1, 0, 0);
+        controller = new PIDController(1, 0, 0);
+    }
+
+    @Override
+    public void initialize() {
+        controller.setSetpoint(setpoint);
+    }
+
+    @Override
+    public void execute() {
+        climbSub.setSpeed(controller.calculate(climbSub.getPos()));
+        
+    }
+
+    @Override 
+    public void end( boolean isFinished) {
+
     }
 
     

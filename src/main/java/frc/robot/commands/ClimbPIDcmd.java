@@ -15,7 +15,6 @@ public class ClimbPIDcmd extends Command{
         PIDController controller = new PIDController(1, 0, 0);
     }
 
-    
 
     
 }

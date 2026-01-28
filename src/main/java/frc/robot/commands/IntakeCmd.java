@@ -5,8 +5,8 @@ import edu.wpi.first.wpilibj2.command.Command;
 import frc.robot.subsystems.IntakeSubsystem;
 
 public class IntakeCmd extends Command{
-    IntakeSubsystem intakeSub; 
-    double speed;
+    private IntakeSubsystem intakeSub; 
+    private double speed;
 
     public IntakeCmd(IntakeSubsystem intakeSub, double speed, double setpoint) {
         this.intakeSub = intakeSub;

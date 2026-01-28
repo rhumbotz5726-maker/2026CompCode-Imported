@@ -6,9 +6,9 @@ import frc.robot.subsystems.ClimbSubsystem;
 
 public class ClimbPIDcmd extends Command{
 
-    ClimbSubsystem climbSub;
-    float setpoint;
-    PIDController controller;
+    private ClimbSubsystem climbSub;
+    private float setpoint;
+    private PIDController controller;
 
     public ClimbPIDcmd(ClimbSubsystem climbSub, float setpoint){
         this.climbSub = climbSub;

@@ -9,12 +9,22 @@ import edu.wpi.first.wpilibj.Servo;
 
 public class ShooterSubsystem {
 
-    SparkMax shooterMotor = new SparkMax(1, MotorType.kBrushless);
+    SparkMax shooterMotor = new SparkMax(1, MotorType.kBrushless); //Shoot
+    SparkMax turretMotor = new SparkMax(5, MotorType.kBrushless); //Spin PID
+    SparkMax beltMotor = new SparkMax(7, MotorType.kBrushless); //Belt
     Servo servo = new Servo(0);
-    SparkAbsoluteEncoder encoder = shooterMotor.getAbsoluteEncoder();
+    SparkAbsoluteEncoder encoder = turretMotor.getAbsoluteEncoder();
 
-    public void setSpeed(double speed) {
+    public void setShooterSpeed(double speed) {
         shooterMotor.set(speed);
+    }
+
+    public void setTurretSpeed(double speed) {
+        turretMotor.set(speed);
+    }
+
+    public void setBeltSpeed(double speed) {
+        beltMotor.set(speed);
     }
 
     public void setServo(double point){

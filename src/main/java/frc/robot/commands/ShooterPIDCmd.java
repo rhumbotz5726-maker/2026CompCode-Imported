@@ -8,7 +8,7 @@ public class ShooterPIDCmd extends Command{
     private ShooterSubsystem shooterSub;
     private double setpoint; 
     private double servopoint;
-    PIDController controller;
+    private PIDController controller;
 
     public ShooterPIDCmd (ShooterSubsystem shooterSub, double setpoint) {
         this.shooterSub = shooterSub;
@@ -34,7 +34,7 @@ public class ShooterPIDCmd extends Command{
 
     @Override
     public void execute() {
-        shooterSub.setSpeed(controller.calculate(shooterSub.getPos())); // replace it with the math thingy later
+        shooterSub.setTurretSpeed(controller.calculate(shooterSub.getPos())); // replace it with the math thingy later
     }
 
     @Override

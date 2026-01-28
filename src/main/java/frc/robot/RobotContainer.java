@@ -6,13 +6,23 @@ package frc.robot;
 
 import choreo.auto.AutoFactory;
 import edu.wpi.first.math.MathUtil;
+import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.Commands;
 import edu.wpi.first.wpilibj2.command.RunCommand;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 import frc.robot.Constants.OIConstants;
+import frc.robot.commands.BeltCmd;
+import frc.robot.commands.ClimbPIDcmd;
+import frc.robot.commands.IntakeCmd;
+import frc.robot.commands.ShooterCmd;
+import frc.robot.commands.ShooterPIDCmd;
+import frc.robot.subsystems.BeltSubsystem;
+import frc.robot.subsystems.ClimbSubsystem;
 import frc.robot.subsystems.Drivesubsystem;
+import frc.robot.subsystems.IntakeSubsystem;
+import frc.robot.subsystems.ShooterSubsystem;
 
 public class RobotContainer {
 
@@ -23,6 +33,10 @@ public class RobotContainer {
   double slow = 1.0;
 
   public static final Drivesubsystem driveSub = new Drivesubsystem();
+  private final BeltSubsystem beltSub = new BeltSubsystem();
+  private final IntakeSubsystem intakeSub = new IntakeSubsystem();
+  private final ClimbSubsystem climbSub = new ClimbSubsystem();
+  private final ShooterSubsystem shooterSub = new ShooterSubsystem();
 
 
 
@@ -42,7 +56,6 @@ public class RobotContainer {
 
     configureBindings();
 
-
     driveSub.setDefaultCommand(
       new RunCommand(() -> 
       driveSub.drive(
@@ -50,6 +63,8 @@ public class RobotContainer {
         getAxis(driver,1, deadband)/slow,
         getAxis(driver,2, deadband)/slow, 
         driver.getRawButton(6)) , driveSub));
+
+    beltSub.setDefaultCommand(new BeltCmd(beltSub, 0.8));
   }
 
   private void configureBindings() {
@@ -64,6 +79,13 @@ public class RobotContainer {
       getTX(0, 0.015), 
         false
       )));
+
+      new JoystickButton(operator, 0).whileTrue(new IntakeCmd(intakeSub, 0.5, 90)); 
+      //There's also intake pid
+      new JoystickButton(operator, 1).whileTrue(new ShooterCmd(shooterSub, 0.5));
+      new JoystickButton(operator, 2).whileTrue(new ShooterPIDCmd(shooterSub, 90)); //PID
+      new JoystickButton(operator, 3).whileTrue(new ShooterPIDCmd(shooterSub, 90, 90)); //servo
+      new JoystickButton(operator, 4).whileTrue(new ClimbPIDcmd(climbSub, 90));
   }
 
   public Command getAutonomousCommand() {

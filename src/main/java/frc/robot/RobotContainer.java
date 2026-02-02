@@ -4,9 +4,9 @@
 
 package frc.robot;
 
-import choreo.auto.AutoFactory;
+import java.util.concurrent.SubmissionPublisher;
+
 import edu.wpi.first.math.MathUtil;
-import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.Commands;
@@ -16,6 +16,7 @@ import frc.robot.Constants.OIConstants;
 import frc.robot.commands.BeltCmd;
 import frc.robot.commands.ClimbPIDcmd;
 import frc.robot.commands.IntakeCmd;
+import frc.robot.commands.IntakeCycleCmd;
 import frc.robot.commands.ShooterCmd;
 import frc.robot.commands.ShooterPIDCmd;
 import frc.robot.subsystems.BeltSubsystem;
@@ -33,10 +34,10 @@ public class RobotContainer {
   double slow = 1.0;
 
   public static final Drivesubsystem driveSub = new Drivesubsystem();
-  private final BeltSubsystem beltSub = new BeltSubsystem();
-  private final IntakeSubsystem intakeSub = new IntakeSubsystem();
-  private final ClimbSubsystem climbSub = new ClimbSubsystem();
-  private final ShooterSubsystem shooterSub = new ShooterSubsystem();
+  public static final BeltSubsystem beltSub = new BeltSubsystem();
+  public static final IntakeSubsystem intakeSub = new IntakeSubsystem();
+  public static final ClimbSubsystem climbSub = new ClimbSubsystem();
+  public static final ShooterSubsystem shooterSub = new ShooterSubsystem();
 
 
 
@@ -80,7 +81,7 @@ public class RobotContainer {
         false
       )));
 
-      new JoystickButton(operator, 0).whileTrue(new IntakeCmd(intakeSub, 0.5, 90)); 
+      new JoystickButton(operator, 0).whileTrue(new IntakeCycleCmd(intakeSub)); 
       //There's also intake pid
       new JoystickButton(operator, 1).whileTrue(new ShooterCmd(shooterSub, 0.5));
       new JoystickButton(operator, 2).whileTrue(new ShooterPIDCmd(shooterSub, 90)); //PID
@@ -93,7 +94,7 @@ public class RobotContainer {
   }
 
   
-  public double getTY(double offset, double scale){
+  public static double getTY(double offset, double scale){
     if(LimelightHelpers.getFiducialID("") == -1){
       return LimelightHelpers.getTY("");
     } else {
@@ -101,7 +102,7 @@ public class RobotContainer {
     }
   }
 
-  public double getTX(double offset, double scale){
+  public static double getTX(double offset, double scale){
     if(LimelightHelpers.getFiducialID("") == -1){
       return LimelightHelpers.getTX("");
     } else {

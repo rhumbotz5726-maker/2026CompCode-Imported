@@ -5,8 +5,9 @@ import com.revrobotics.spark.SparkMax;
 import com.revrobotics.spark.SparkLowLevel.MotorType;
 
 import edu.wpi.first.wpilibj.Servo;
+import edu.wpi.first.wpilibj2.command.SubsystemBase;
 
-public class ShooterSubsystem {
+public class ShooterSubsystem extends SubsystemBase{
 
     SparkMax shooterMotor = new SparkMax(1, MotorType.kBrushless); //Shoot
     SparkMax turretMotor = new SparkMax(5, MotorType.kBrushless); //Spin PID

@@ -8,11 +8,12 @@ public class IntakeCmd extends Command{
     private IntakeSubsystem intakeSub; 
     private double speed;
 
-    public IntakeCmd(IntakeSubsystem intakeSub, double speed, double setpoint) {
+    public IntakeCmd(IntakeSubsystem intakeSub, double speed) {
         this.intakeSub = intakeSub;
         this.speed = speed;
     }
 
+   
     @Override
     public void initialize() {
     }

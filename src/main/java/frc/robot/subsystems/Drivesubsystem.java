@@ -42,7 +42,6 @@ public class Drivesubsystem extends SubsystemBase{
         DriveConstants.kBackRightChassisAngularOffset);
 
         private final static AHRS gyro = new AHRS(NavXComType.kMXP_SPI);
-  
         SwerveDriveOdometry odometry = new SwerveDriveOdometry(
             DriveConstants.kDriveKinematics,
             Rotation2d.fromDegrees(gyro.getAngle()),
@@ -142,6 +141,7 @@ public class Drivesubsystem extends SubsystemBase{
             return odometry.getPoseMeters();
         }
 
+        @SuppressWarnings("unused")
         private ChassisSpeeds getRobotRelativeSpeeds(){
                 return DriveConstants.kDriveKinematics.toChassisSpeeds(getModuleStates());
         }

@@ -34,7 +34,7 @@ public class Autos {
     public Command shootThenClimb(String start, String mid, String end){
         return Commands.sequence(
             autoFactory.trajectoryCmd(start+"t"+mid),
-            new ShooterLineUpCmd(),
+            new ShooterLineUpCmd(RobotContainer.shooterSub),
             autoFactory.trajectoryCmd(start+"t"+end),
             new ClimbPIDcmd(null, 0)
         );
@@ -43,18 +43,18 @@ public class Autos {
      public Command shoot(String start, String mid){
         return Commands.sequence(
               autoFactory.trajectoryCmd(start+"t"+mid),
-            new ShooterLineUpCmd()
+              new ShooterLineUpCmd(RobotContainer.shooterSub)
             );
     }
 
      public Command shootReloadClimb(String start,String mid, String reload, String end){
         return Commands.sequence(
             autoFactory.trajectoryCmd(start+"t"+mid),
-            new ShooterLineUpCmd(),
+            new ShooterLineUpCmd(RobotContainer.shooterSub),
             autoFactory.trajectoryCmd(mid+"t"+reload),
-            new IntakeCmd(),
+            new IntakeCmd(RobotContainer.intakeSub,2),
             autoFactory.trajectoryCmd(reload+"t"+mid),
-            new ShooterLineUpCmd(),
+            new ShooterLineUpCmd(RobotContainer.shooterSub),
             autoFactory.trajectoryCmd(mid+"t"+end),
             new ClimbPIDcmd(null, 0)
         );
@@ -63,11 +63,12 @@ public class Autos {
       public Command shootReloadShoot(String start,String mid, String reload, String end){
         return Commands.sequence(
             autoFactory.trajectoryCmd(start+"t"+mid),
-            new ShooterLineUpCmd(),
+            new ShooterLineUpCmd(RobotContainer.shooterSub),
             autoFactory.trajectoryCmd(mid+"t"+reload),
-            new IntakeCmd(),
+            new IntakeCmd(RobotContainer.intakeSub,2),
+            
             autoFactory.trajectoryCmd(reload+"t"+mid),
-            new ShooterLineUpCmd()
+            new ShooterLineUpCmd(RobotContainer.shooterSub)
         );
     }
 

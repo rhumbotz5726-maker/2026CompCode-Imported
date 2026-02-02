@@ -101,8 +101,15 @@ public final class Constants {
     public static final double kFreeSpeedRpm = 5676;
   }
   public static final class LimelightConstants{
-    static double limelightMountAngle = 25.0;
-    static double limelightLensHeightInches = 20.0;
-    static double goalHeightInches = 60.0;
+    public static final double TX_TO_SHOOTER_ROTATIONS = 1;
+    public static double ACCEPTABLE_RANGE = 1;
+
+  }
+
+  public static final class intakeConstants{
+    public static double INTAKE_EXTEND_SETPOINT = 1;
+    public static double INTAKE_PUTBACKf_SETPOINT = 1;
+
+
   }
 }

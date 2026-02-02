@@ -7,17 +7,16 @@ import frc.robot.subsystems.ShooterSubsystem;
 public class ShooterPIDCmd extends Command{
     private ShooterSubsystem shooterSub;
     private double setpoint; 
-    private double servopoint;
+    private double servopoint = 0;
     private PIDController controller;
 
     public ShooterPIDCmd (ShooterSubsystem shooterSub, double setpoint) {
         this.shooterSub = shooterSub;
         this.setpoint = setpoint;
-
+        
         // TODO set these up so that like they are real values and not just 1
         controller = new PIDController(1, 0, 0);
-        // can't remember what else goes here for now
-        // you got it all pmuch
+ 
     }
 
        public ShooterPIDCmd (ShooterSubsystem shooterSub, double setpoint, double servopoint) {
@@ -39,7 +38,7 @@ public class ShooterPIDCmd extends Command{
 
     @Override
     public void end(boolean isFinished) {
-
+        
     }
 
 }

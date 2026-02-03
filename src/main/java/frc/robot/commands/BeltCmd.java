@@ -13,17 +13,8 @@ public class BeltCmd extends Command{
     }
 
     @Override
-    public void initialize() {
-
-    }
-
-    @Override
     public void execute() {
         beltSub.setSpeed(speed);
     }
 
-    @Override
-    public void end(boolean isFinished) {
-
-    }
 }

@@ -9,9 +9,9 @@ import edu.wpi.first.wpilibj2.command.SubsystemBase;
 
 public class ShooterSubsystem extends SubsystemBase{
 
-    SparkMax shooterMotor = new SparkMax(1, MotorType.kBrushless); //Shoot
+    SparkMax shooterMotor = new SparkMax(1, MotorType.kBrushless); //Shooter is for actually shooting
     SparkMax turretMotor = new SparkMax(5, MotorType.kBrushless); //Spin PID
-    SparkMax beltMotor = new SparkMax(7, MotorType.kBrushless); //Belt
+    SparkMax beltMotor = new SparkMax(7, MotorType.kBrushless); //Belt is for laoding balls into shooter
     Servo servo = new Servo(0);
     SparkAbsoluteEncoder encoder = turretMotor.getAbsoluteEncoder();
 

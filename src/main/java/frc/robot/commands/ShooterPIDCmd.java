@@ -9,6 +9,7 @@ public class ShooterPIDCmd extends Command{
     private double setpoint; 
     private double servopoint = 0;
     private PIDController controller;
+    private double tolerance = 0.05;
 
     public ShooterPIDCmd (ShooterSubsystem shooterSub, double setpoint) {
         this.shooterSub = shooterSub;
@@ -34,6 +35,11 @@ public class ShooterPIDCmd extends Command{
     @Override
     public void execute() {
         shooterSub.setTurretSpeed(controller.calculate(shooterSub.getPos())); // replace it with the math thingy later
+    }
+
+    @Override
+    public boolean isFinished() {
+        return Math.abs(shooterSub.getPos() - setpoint) < tolerance;
     }
 
     @Override

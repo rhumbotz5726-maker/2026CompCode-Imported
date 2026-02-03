@@ -9,6 +9,7 @@ public class IntakePIDCmd extends Command{
     private IntakeSubsystem intakeSub;
     private double setpoint; 
     private PIDController controller;
+    private double tolerance = 0.05;
 
     public IntakePIDCmd(IntakeSubsystem intakeSub, double setpoint) {
         this.intakeSub = intakeSub;
@@ -25,8 +26,11 @@ public class IntakePIDCmd extends Command{
     public void execute() {
         intakeSub.pidSetSpeed(controller.calculate(intakeSub.getPos()));
     }
-    @Override
-    public void end( boolean isFinished) {
 
+    @Override
+    public boolean isFinished() {
+        return Math.abs(intakeSub.getPos() - setpoint) < tolerance;
     }
+
+
 }

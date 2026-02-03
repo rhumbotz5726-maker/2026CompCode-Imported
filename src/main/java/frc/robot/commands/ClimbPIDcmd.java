@@ -9,6 +9,7 @@ public class ClimbPIDcmd extends Command{
     private ClimbSubsystem climbSub;
     private float setpoint;
     private PIDController controller;
+    private float tolerance = 0.05f;
 
     public ClimbPIDcmd(ClimbSubsystem climbSub, float setpoint){
         this.climbSub = climbSub;
@@ -27,11 +28,10 @@ public class ClimbPIDcmd extends Command{
         
     }
 
-    @Override 
-    public void end( boolean isFinished) {
-
+    @Override
+    public boolean isFinished() {
+        return Math.abs(climbSub.getPos() - setpoint) < tolerance;
     }
-
 
     
 }

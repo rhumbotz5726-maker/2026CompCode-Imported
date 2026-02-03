@@ -4,7 +4,6 @@
 
 package frc.robot;
 
-import java.util.concurrent.SubmissionPublisher;
 
 import edu.wpi.first.math.MathUtil;
 import edu.wpi.first.wpilibj.XboxController;
@@ -15,8 +14,6 @@ import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 import frc.robot.Constants.OIConstants;
 import frc.robot.commands.BeltCmd;
 import frc.robot.commands.ClimbPIDcmd;
-import frc.robot.commands.IntakeCmd;
-import frc.robot.commands.IntakeCycleCmd;
 import frc.robot.commands.ShooterCmd;
 import frc.robot.commands.ShooterPIDCmd;
 import frc.robot.subsystems.BeltSubsystem;
@@ -81,7 +78,7 @@ public class RobotContainer {
         false
       )));
 
-      new JoystickButton(operator, 0).whileTrue(new IntakeCycleCmd(intakeSub)); 
+      new JoystickButton(operator, 0).whileTrue(new frc.robot.commands.teleop.IntakeCycleCmd(intakeSub)); 
       //There's also intake pid
       new JoystickButton(operator, 1).whileTrue(new ShooterCmd(shooterSub, 0.5));
       new JoystickButton(operator, 2).whileTrue(new ShooterPIDCmd(shooterSub, 90)); //PID

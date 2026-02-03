@@ -13,18 +13,8 @@ public class IntakeCmd extends Command{
         this.speed = speed;
     }
 
-   
-    @Override
-    public void initialize() {
-    }
-
     @Override
     public void execute() {
         intakeSub.intakeSetSpeed(speed);
-    }
-
-    @Override
-    public void end(boolean isFinished) {
-
     }
 }

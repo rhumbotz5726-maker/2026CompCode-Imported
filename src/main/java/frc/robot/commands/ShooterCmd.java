@@ -13,17 +13,7 @@ public class ShooterCmd extends Command{
     }
 
     @Override
-    public void initialize() {
-
-    }
-
-    @Override
     public void execute() {
         shooterSub.setShooterSpeed(speed);
-    }
-
-    @Override
-    public void end(boolean isFinished) {
-
     }
 }

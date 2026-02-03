@@ -1,7 +1,8 @@
-package frc.robot.commands;
+package frc.robot.commands.teleop;
 
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.Commands;
+import frc.robot.commands.*;
 import frc.robot.Constants;
 import frc.robot.subsystems.IntakeSubsystem;
 

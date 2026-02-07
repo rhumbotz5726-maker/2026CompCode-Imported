@@ -5,13 +5,14 @@ import com.revrobotics.spark.SparkMax;
 import com.revrobotics.spark.SparkLowLevel.MotorType;
 
 import edu.wpi.first.wpilibj.Servo;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 
 public class ShooterSubsystem extends SubsystemBase{
 
-    SparkMax shooterMotor = new SparkMax(1, MotorType.kBrushless); //Shooter is for actually shooting
-    SparkMax turretMotor = new SparkMax(5, MotorType.kBrushless); //Spin PID
-    SparkMax beltMotor = new SparkMax(7, MotorType.kBrushless); //Belt is for laoding balls into shooter
+    SparkMax shooterMotor = new SparkMax(5, MotorType.kBrushless); //Shoot
+    SparkMax turretMotor = new SparkMax(6, MotorType.kBrushless); //Spin PID
+    SparkMax beltMotor = new SparkMax(7, MotorType.kBrushless); //Belt
     Servo servo = new Servo(0);
     SparkAbsoluteEncoder encoder = turretMotor.getAbsoluteEncoder();
 
@@ -37,6 +38,10 @@ public class ShooterSubsystem extends SubsystemBase{
 
     public double getPos(){
         return encoder.getPosition();
+    }
+
+    public void perodic() {
+        SmartDashboard.putNumber("Turret encoder: ", getPos());
     }
     
 }

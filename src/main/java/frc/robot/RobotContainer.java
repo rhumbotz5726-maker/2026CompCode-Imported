@@ -4,8 +4,9 @@
 
 package frc.robot;
 
-
+import choreo.auto.AutoFactory;
 import edu.wpi.first.math.MathUtil;
+import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.Commands;
@@ -14,6 +15,7 @@ import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 import frc.robot.Constants.OIConstants;
 import frc.robot.commands.BeltCmd;
 import frc.robot.commands.ClimbPIDcmd;
+import frc.robot.commands.IntakeCmd;
 import frc.robot.commands.ShooterCmd;
 import frc.robot.commands.ShooterPIDCmd;
 import frc.robot.subsystems.BeltSubsystem;
@@ -25,16 +27,16 @@ import frc.robot.subsystems.ShooterSubsystem;
 public class RobotContainer {
 
   XboxController driver = new XboxController(0);
-  XboxController operator = new XboxController(1);
+  //XboxController operator = new XboxController(1);
 
   double deadband = 0.03;
-  double slow = 1.0;
+  double slow = 1.5;
 
   public static final Drivesubsystem driveSub = new Drivesubsystem();
-  public static final BeltSubsystem beltSub = new BeltSubsystem();
-  public static final IntakeSubsystem intakeSub = new IntakeSubsystem();
-  public static final ClimbSubsystem climbSub = new ClimbSubsystem();
-  public static final ShooterSubsystem shooterSub = new ShooterSubsystem();
+  //private final BeltSubsystem beltSub = new BeltSubsystem();
+  //private final IntakeSubsystem intakeSub = new IntakeSubsystem();
+ // private final ClimbSubsystem climbSub = new ClimbSubsystem();
+  //private final ShooterSubsystem shooterSub = new ShooterSubsystem();
 
 
 
@@ -62,28 +64,32 @@ public class RobotContainer {
         getAxis(driver,2, deadband)/slow, 
         driver.getRawButton(6)) , driveSub));
 
-    beltSub.setDefaultCommand(new BeltCmd(beltSub, 0.8));
+   // beltSub.setDefaultCommand(new BeltCmd(beltSub, 0.5));
   }
 
   private void configureBindings() {
+
+    /* 
        new JoystickButton(driver, 2).whileTrue(new RunCommand(() -> driveSub.drive(
       -MathUtil.applyDeadband(driver.getLeftY()/slow, OIConstants.kDriveDeadband),
       -MathUtil.applyDeadband(driver.getLeftX()/slow, OIConstants.kDriveDeadband),
          -(LimelightHelpers.getTX("")+0) * 0.015, false), driveSub));
-
+     
     new JoystickButton(driver, 3).whileTrue(new RunCommand(() -> driveSub.drive(
      getTY(-2,-0.05),
       -MathUtil.applyDeadband(driver.getLeftX()/slow, OIConstants.kDriveDeadband), 
       getTX(0, 0.015), 
         false
       )));
-
-      new JoystickButton(operator, 0).whileTrue(new frc.robot.commands.teleop.IntakeCycleCmd(intakeSub)); 
+      */
+      /* 
+      new JoystickButton(operator, 0).whileTrue(new IntakeCmd(intakeSub, 0.5)); 
       //There's also intake pid
       new JoystickButton(operator, 1).whileTrue(new ShooterCmd(shooterSub, 0.5));
       new JoystickButton(operator, 2).whileTrue(new ShooterPIDCmd(shooterSub, 90)); //PID
       new JoystickButton(operator, 3).whileTrue(new ShooterPIDCmd(shooterSub, 90, 90)); //servo
       new JoystickButton(operator, 4).whileTrue(new ClimbPIDcmd(climbSub, 90));
+      */
   }
 
   public Command getAutonomousCommand() {
@@ -91,7 +97,7 @@ public class RobotContainer {
   }
 
   
-  public static double getTY(double offset, double scale){
+  public double getTY(double offset, double scale){
     if(LimelightHelpers.getFiducialID("") == -1){
       return LimelightHelpers.getTY("");
     } else {
@@ -99,7 +105,7 @@ public class RobotContainer {
     }
   }
 
-  public static double getTX(double offset, double scale){
+  public double getTX(double offset, double scale){
     if(LimelightHelpers.getFiducialID("") == -1){
       return LimelightHelpers.getTX("");
     } else {

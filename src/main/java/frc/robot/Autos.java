@@ -7,10 +7,11 @@ import frc.robot.commands.ClimbPIDcmd;
 import frc.robot.commands.IntakeCmd;
 import frc.robot.commands.ShooterLineUpCmd;
 import frc.robot.commands.ShooterPIDCmd;
+import frc.robot.subsystems.IntakeSubsystem;
 
 public class Autos {
 
-
+    private final IntakeSubsystem intakeSub = new IntakeSubsystem();
 
     AutoFactory autoFactory =new AutoFactory(
     //these are method pointers they basically tell the code "Hey the method you want is right here"
@@ -34,7 +35,7 @@ public class Autos {
     public Command shootThenClimb(String start, String mid, String end){
         return Commands.sequence(
             autoFactory.trajectoryCmd(start+"t"+mid),
-            new ShooterLineUpCmd(RobotContainer.shooterSub),
+            new ShooterLineUpCmd(),
             autoFactory.trajectoryCmd(start+"t"+end),
             new ClimbPIDcmd(null, 0)
         );
@@ -43,18 +44,18 @@ public class Autos {
      public Command shoot(String start, String mid){
         return Commands.sequence(
               autoFactory.trajectoryCmd(start+"t"+mid),
-              new ShooterLineUpCmd(RobotContainer.shooterSub)
+            new ShooterLineUpCmd()
             );
     }
 
      public Command shootReloadClimb(String start,String mid, String reload, String end){
         return Commands.sequence(
             autoFactory.trajectoryCmd(start+"t"+mid),
-            new ShooterLineUpCmd(RobotContainer.shooterSub),
+            new ShooterLineUpCmd(),
             autoFactory.trajectoryCmd(mid+"t"+reload),
-            new IntakeCmd(RobotContainer.intakeSub,2),
+            new IntakeCmd(intakeSub, 0.5),
             autoFactory.trajectoryCmd(reload+"t"+mid),
-            new ShooterLineUpCmd(RobotContainer.shooterSub),
+            new ShooterLineUpCmd(),
             autoFactory.trajectoryCmd(mid+"t"+end),
             new ClimbPIDcmd(null, 0)
         );
@@ -63,12 +64,11 @@ public class Autos {
       public Command shootReloadShoot(String start,String mid, String reload, String end){
         return Commands.sequence(
             autoFactory.trajectoryCmd(start+"t"+mid),
-            new ShooterLineUpCmd(RobotContainer.shooterSub),
+            new ShooterLineUpCmd(),
             autoFactory.trajectoryCmd(mid+"t"+reload),
-            new IntakeCmd(RobotContainer.intakeSub,2),
-            
+            new IntakeCmd(intakeSub, 0.5),
             autoFactory.trajectoryCmd(reload+"t"+mid),
-            new ShooterLineUpCmd(RobotContainer.shooterSub)
+            new ShooterLineUpCmd()
         );
     }
 

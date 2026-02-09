@@ -28,7 +28,7 @@ public class RobotContainer {
 
   XboxController driver = new XboxController(0);
   //XboxController operator = new XboxController(1);
-
+  Autos autos = new Autos();
   double deadband = 0.03;
   double slow = 1.5;
 
@@ -59,15 +59,16 @@ public class RobotContainer {
     driveSub.setDefaultCommand(
       new RunCommand(() -> 
       driveSub.drive(
-        getAxis(driver,0, deadband)/slow, 
-        getAxis(driver,1, deadband)/slow,
-        getAxis(driver,2, deadband)/slow, 
+        -getAxis(driver,1, deadband)/slow, 
+        -getAxis(driver,0, deadband)/slow,
+        -getAxis(driver,4, deadband)/slow, 
         driver.getRawButton(6)) , driveSub));
 
    // beltSub.setDefaultCommand(new BeltCmd(beltSub, 0.5));
   }
 
   private void configureBindings() {
+        new JoystickButton(driver, 5).whileTrue(new RunCommand(() -> driveSub.resetGyro(), driveSub));
 
     /* 
        new JoystickButton(driver, 2).whileTrue(new RunCommand(() -> driveSub.drive(
@@ -92,9 +93,10 @@ public class RobotContainer {
       */
   }
 
+  
+
   public Command getAutonomousCommand() {
-    return Commands.print("No autonomous command configured");
-  }
+    return autos.shoot("s2", "m2") ; }
 
   
   public double getTY(double offset, double scale){

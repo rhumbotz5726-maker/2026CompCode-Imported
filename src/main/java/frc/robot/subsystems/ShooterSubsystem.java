@@ -5,6 +5,7 @@ import com.revrobotics.spark.SparkMax;
 import com.revrobotics.spark.SparkLowLevel.MotorType;
 
 import edu.wpi.first.wpilibj.Servo;
+import edu.wpi.first.wpilibj.motorcontrol.Spark;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 
@@ -12,7 +13,9 @@ public class ShooterSubsystem extends SubsystemBase{
 
     SparkMax shooterMotor = new SparkMax(5, MotorType.kBrushless); //Shoot
     SparkMax turretMotor = new SparkMax(6, MotorType.kBrushless); //Spin PID
-    SparkMax beltMotor = new SparkMax(7, MotorType.kBrushless); //Belt
+    SparkMax beltMotor1 = new SparkMax(7, MotorType.kBrushless); //Belt
+    SparkMax beltMotor2 = new SparkMax(8, MotorType.kBrushless); //Belt
+
     Servo servo = new Servo(0);
     SparkAbsoluteEncoder encoder = turretMotor.getAbsoluteEncoder();
 
@@ -25,7 +28,8 @@ public class ShooterSubsystem extends SubsystemBase{
     }
 
     public void setBeltSpeed(double speed) {
-        beltMotor.set(speed);
+        beltMotor1.set(speed);
+        beltMotor2.set(speed);
     }
 
     public void setServo(double point){

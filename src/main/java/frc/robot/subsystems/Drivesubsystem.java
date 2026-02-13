@@ -209,7 +209,7 @@ public class Drivesubsystem extends SubsystemBase{
  public void followTrajectory(SwerveSample sample) {
         // Get the current pose of the robot
         Pose2d pose = getPose();
-        SmartDashboard.putString("sample", "" + sample);
+        SmartDashboard.putString("sample", "" + sample.omega);
         // Generate the next speeds for the robot
         ChassisSpeeds speeds = new ChassisSpeeds(
             sample.vx + xController.calculate(pose.getX(), sample.x),
@@ -218,10 +218,7 @@ public class Drivesubsystem extends SubsystemBase{
         );
 
  
-
-        // Apply the generated speeds
-        setModuleStates(ChassisSpeeds.fromFieldRelativeSpeeds(speeds,
-        new Rotation2d(getHeading())));
+            drive(speeds.vxMetersPerSecond, speeds.vyMetersPerSecond, speeds.omegaRadiansPerSecond, true);
         SmartDashboard.putString("xspeed", "" + speeds.vxMetersPerSecond);
 
     }

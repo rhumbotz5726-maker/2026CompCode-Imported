@@ -30,7 +30,7 @@ public class RobotContainer {
   //XboxController operator = new XboxController(1);
   Autos autos = new Autos();
   double deadband = 0.03;
-  double slow = 5;
+  double slow = 1.5;
 
   public static final Drivesubsystem driveSub = new Drivesubsystem();
   //private final BeltSubsystem beltSub = new BeltSubsystem();
@@ -69,7 +69,7 @@ public class RobotContainer {
 
   private void configureBindings() {
         new JoystickButton(driver, 5).whileTrue(new RunCommand(() -> driveSub.resetGyro(), driveSub));
-        new JoystickButton(driver, 1).whileTrue(autos.test("test"));
+        new JoystickButton(driver, 1).whileTrue(autos.test("s2tm2"));
     /* 
        new JoystickButton(driver, 2).whileTrue(new RunCommand(() -> driveSub.drive(
       -MathUtil.applyDeadband(driver.getLeftY()/slow, OIConstants.kDriveDeadband),
@@ -96,7 +96,7 @@ public class RobotContainer {
   
 
   public Command getAutonomousCommand() {
-    return autos.test("test") ; 
+    return autos.test("s2tm2") ; 
   }
 
   

@@ -49,15 +49,16 @@ public class Drivesubsystem extends SubsystemBase{
             getSwervePos()
         );
 
-        private final PIDController xController = new PIDController(1.0, 0.0, 0.0);
-        private final PIDController yController = new PIDController(1.0, 0.0, 0.0);
-        private final PIDController headingController = new PIDController(1.0, 0.0, 0.0);
+        private final PIDController xController = new PIDController(10.0, 0.0, 0.0);
+        private final PIDController yController = new PIDController(10.0, 0.0, 0.0);
+        private final PIDController headingController = new PIDController(7.5, 0.0, 0.0);
 
 
 
         //Constructor
         public Drivesubsystem(){
                 HAL.report(tResourceType.kResourceType_RobotDrive, tInstances.kRobotDriveSwerve_MaxSwerve);
+                headingController.enableContinuousInput(-Math.PI, Math.PI);
         }
 
 
@@ -222,7 +223,10 @@ public class Drivesubsystem extends SubsystemBase{
         SmartDashboard.putString("xspeed", "" + speeds.vxMetersPerSecond);
 
     }
-
+    public void autoResetGyo(Pose2d pose2d){
+        resetGyro();
+        resetOdometry(pose2d);
+    }
 
         public void setModuleStates(ChassisSpeeds chassisSpeeds) {
             Math.hypot(chassisSpeeds.vxMetersPerSecond, chassisSpeeds.vyMetersPerSecond);

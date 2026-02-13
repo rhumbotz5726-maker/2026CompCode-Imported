@@ -51,8 +51,10 @@ public class Autos {
     }
 
     public Command test(String name){
-        autoFactory.resetOdometry(name);
+        
+    
         return Commands.sequence(
+              autoFactory.resetOdometry(name),
               autoFactory.trajectoryCmd(name)
             );
     }

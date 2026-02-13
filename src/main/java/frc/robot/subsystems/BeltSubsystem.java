@@ -8,10 +8,8 @@ import com.revrobotics.spark.SparkMax;
 
 public class BeltSubsystem extends SubsystemBase{
     SparkMax beltMotor1 = new SparkMax(0, MotorType.kBrushless);
-    SparkMax beltMotor2 = new SparkMax(1, MotorType.kBrushless);
 
     public void setSpeed(double speed) {
         beltMotor1.set(speed);
-        beltMotor2.set(speed);
     }
 }

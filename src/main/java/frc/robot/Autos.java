@@ -17,17 +17,22 @@ import frc.robot.commands.ClimbPIDcmd;
 import frc.robot.commands.IntakeCmd;
 import frc.robot.commands.ShooterLineUpCmd;
 import frc.robot.commands.ShooterPIDCmd;
+import frc.robot.subsystems.Drivesubsystem;
 
 public class Autos {
+    public static Drivesubsystem driveSub;
 
+    public Autos(Drivesubsystem drivesubsystem){
+        this.driveSub=drivesubsystem;
+    }
   
     AutoFactory autoFactory =new AutoFactory(
     //these are method pointers they basically tell the code "Hey the method you want is right here"
-        RobotContainer.driveSub::getPose,
-        RobotContainer.driveSub::resetOdometry,
-        RobotContainer.driveSub::followTrajectory,
+        driveSub::getPose,
+        driveSub::resetOdometry,
+        driveSub::followTrajectory,
         false, 
-        RobotContainer.driveSub
+        driveSub
     );
 
     //this will be an example for like the lineup n stuff
@@ -72,7 +77,7 @@ public class Autos {
             autoFactory.trajectoryCmd(start+"t"+mid),
             new ShooterLineUpCmd(),
             autoFactory.trajectoryCmd(mid+"t"+reload),
-            new IntakeCmd(RobotContainer.intakeSub, 0.5),
+            new IntakeCmd(.intakeSub, 0.5),
             autoFactory.trajectoryCmd(reload+"t"+mid),
             new ShooterLineUpCmd(),
             autoFactory.trajectoryCmd(mid+"t"+end),
@@ -92,11 +97,5 @@ public class Autos {
 
     }
         */
-
-  
-  
-
-
-    
     
 }

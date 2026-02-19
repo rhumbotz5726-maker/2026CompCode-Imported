@@ -6,6 +6,7 @@ package frc.robot;
 
 import java.util.Optional;
 
+import edu.wpi.first.cameraserver.CameraServer;
 import edu.wpi.first.math.geometry.Pose2d;
 import edu.wpi.first.wpilibj.TimedRobot;
 import edu.wpi.first.wpilibj.Timer;
@@ -19,6 +20,7 @@ public class Robot extends TimedRobot {
   private final RobotContainer m_robotContainer;
   public Robot() {
     m_robotContainer = new RobotContainer();
+    //CameraServer.startAutomaticCapture();
   }
 
   @Override

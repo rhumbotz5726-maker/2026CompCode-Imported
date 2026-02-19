@@ -16,4 +16,9 @@ public class ShooterCmd extends Command{
     public void execute() {
         shooterSub.setShooterSpeed(speed);
     }
+
+    @Override
+    public void end(boolean interrupted) {
+        shooterSub.setShooterSpeed(0);
+    }
 }

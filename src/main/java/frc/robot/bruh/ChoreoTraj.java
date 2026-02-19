@@ -27,175 +27,175 @@ public record ChoreoTraj(
     public static final ChoreoTraj m1tc1 = new ChoreoTraj(
 	    "m1tc1",
 	    OptionalInt.empty(),
-	    0.75694,
+	    0.75681,
 	    new Pose2d(14.85, 2.4, Rotation2d.fromRadians(2.42)),
 	    new Pose2d(14.95, 3.72, Rotation2d.fromRadians(0))
 	);
 	public static final ChoreoTraj m1tc2 = new ChoreoTraj(
 	    "m1tc2",
 	    OptionalInt.empty(),
-	    4.00642,
+	    1.24769,
 	    new Pose2d(14.85, 2.4, Rotation2d.fromRadians(2.42)),
 	    new Pose2d(14.95, 4.32, Rotation2d.fromRadians(0))
 	);
 	public static final ChoreoTraj m1tc3 = new ChoreoTraj(
 	    "m1tc3",
 	    OptionalInt.empty(),
-	    0.93848,
+	    1.41322,
 	    new Pose2d(14.85, 2.4, Rotation2d.fromRadians(2.42)),
 	    new Pose2d(14.95, 4.75, Rotation2d.fromRadians(0))
 	);
 	public static final ChoreoTraj m1tp1 = new ChoreoTraj(
 	    "m1tp1",
 	    OptionalInt.empty(),
-	    0.58034,
+	    0.65994,
 	    new Pose2d(14.85, 2.4, Rotation2d.fromRadians(2.42)),
 	    new Pose2d(15.48, 2.1, Rotation2d.fromRadians(0))
 	);
 	public static final ChoreoTraj m1tp2 = new ChoreoTraj(
 	    "m1tp2",
 	    OptionalInt.empty(),
-	    1.4062,
+	    1.60837,
 	    new Pose2d(14.85, 2.4, Rotation2d.fromRadians(2.42)),
 	    new Pose2d(15.95, 7.4, Rotation2d.fromRadians(0))
 	);
 	public static final ChoreoTraj m2tc1 = new ChoreoTraj(
 	    "m2tc1",
 	    OptionalInt.empty(),
-	    0.66384,
+	    0.86343,
 	    new Pose2d(14.4, 4, Rotation2d.fromRadians(3.142)),
 	    new Pose2d(14.95, 3.72, Rotation2d.fromRadians(0))
 	);
 	public static final ChoreoTraj m2tc2 = new ChoreoTraj(
 	    "m2tc2",
 	    OptionalInt.empty(),
-	    5.08176,
-	    new Pose2d(14.4, 4, Rotation2d.fromRadians(-3.142)),
+	    0.86781,
+	    new Pose2d(14.4, 4, Rotation2d.fromRadians(3.142)),
 	    new Pose2d(14.95, 4.32, Rotation2d.fromRadians(0))
 	);
 	public static final ChoreoTraj m2tc3 = new ChoreoTraj(
 	    "m2tc3",
 	    OptionalInt.empty(),
-	    0.72534,
+	    0.72613,
 	    new Pose2d(14.4, 4, Rotation2d.fromRadians(3.142)),
 	    new Pose2d(14.95, 4.75, Rotation2d.fromRadians(0))
 	);
 	public static final ChoreoTraj m2tp1 = new ChoreoTraj(
 	    "m2tp1",
 	    OptionalInt.empty(),
-	    0.93875,
+	    0.99669,
 	    new Pose2d(14.4, 4, Rotation2d.fromRadians(3.142)),
 	    new Pose2d(15.48, 2.1, Rotation2d.fromRadians(0))
 	);
 	public static final ChoreoTraj m2tp2 = new ChoreoTraj(
 	    "m2tp2",
 	    OptionalInt.empty(),
-	    1.17711,
+	    1.3128,
 	    new Pose2d(14.4, 4, Rotation2d.fromRadians(3.142)),
 	    new Pose2d(15.95, 7.4, Rotation2d.fromRadians(0))
 	);
 	public static final ChoreoTraj m3tc1 = new ChoreoTraj(
 	    "m3tc1",
 	    OptionalInt.empty(),
-	    0.98512,
+	    1.03648,
 	    new Pose2d(14.85, 6.35, Rotation2d.fromRadians(-2.425)),
 	    new Pose2d(14.95, 3.72, Rotation2d.fromRadians(0))
 	);
 	public static final ChoreoTraj m3tc2 = new ChoreoTraj(
 	    "m3tc2",
 	    OptionalInt.empty(),
-	    0.88514,
+	    2.78668,
 	    new Pose2d(14.85, 6.35, Rotation2d.fromRadians(-2.425)),
 	    new Pose2d(14.95, 4.32, Rotation2d.fromRadians(0))
 	);
 	public static final ChoreoTraj m3tc3 = new ChoreoTraj(
 	    "m3tc3",
 	    OptionalInt.empty(),
-	    0.8084,
+	    1.07184,
 	    new Pose2d(14.85, 6.35, Rotation2d.fromRadians(-2.425)),
 	    new Pose2d(14.95, 4.75, Rotation2d.fromRadians(0))
 	);
 	public static final ChoreoTraj m3tp1 = new ChoreoTraj(
 	    "m3tp1",
 	    OptionalInt.empty(),
-	    10.5089,
+	    1.41963,
 	    new Pose2d(14.85, 6.35, Rotation2d.fromRadians(-2.425)),
 	    new Pose2d(15.48, 2.1, Rotation2d.fromRadians(0))
 	);
 	public static final ChoreoTraj m3tp2 = new ChoreoTraj(
 	    "m3tp2",
 	    OptionalInt.empty(),
-	    0.7907,
+	    1.09142,
 	    new Pose2d(14.85, 6.35, Rotation2d.fromRadians(-2.425)),
 	    new Pose2d(15.95, 7.4, Rotation2d.fromRadians(0))
 	);
 	public static final ChoreoTraj s1tm1 = new ChoreoTraj(
 	    "s1tm1",
 	    OptionalInt.empty(),
-	    0.97182,
+	    1.02156,
 	    new Pose2d(12.9, 0.75, Rotation2d.fromRadians(0)),
 	    new Pose2d(14.85, 2.4, Rotation2d.fromRadians(2.42))
 	);
 	public static final ChoreoTraj s1tm2 = new ChoreoTraj(
 	    "s1tm2",
 	    OptionalInt.empty(),
-	    1.15357,
+	    1.76009,
 	    new Pose2d(12.9, 0.75, Rotation2d.fromRadians(0)),
 	    new Pose2d(14.4, 4, Rotation2d.fromRadians(3.142))
 	);
 	public static final ChoreoTraj s1tm3 = new ChoreoTraj(
 	    "s1tm3",
 	    OptionalInt.empty(),
-	    1.47299,
+	    1.72631,
 	    new Pose2d(12.9, 0.75, Rotation2d.fromRadians(0)),
 	    new Pose2d(14.85, 6.35, Rotation2d.fromRadians(-2.425))
 	);
 	public static final ChoreoTraj s2tm1 = new ChoreoTraj(
 	    "s2tm1",
 	    OptionalInt.empty(),
-	    0.95459,
+	    3.09718,
 	    new Pose2d(13, 4, Rotation2d.fromRadians(0)),
 	    new Pose2d(14.85, 2.4, Rotation2d.fromRadians(2.42))
 	);
 	public static final ChoreoTraj s2tm2 = new ChoreoTraj(
 	    "s2tm2",
 	    OptionalInt.empty(),
-	    0.79908,
+	    0.8158,
 	    new Pose2d(13, 4, Rotation2d.fromRadians(0)),
 	    new Pose2d(14.4, 4, Rotation2d.fromRadians(3.142))
 	);
 	public static final ChoreoTraj s2tm3 = new ChoreoTraj(
 	    "s2tm3",
 	    OptionalInt.empty(),
-	    1.0422,
+	    1.11304,
 	    new Pose2d(13, 4, Rotation2d.fromRadians(0)),
 	    new Pose2d(14.85, 6.35, Rotation2d.fromRadians(-2.425))
 	);
 	public static final ChoreoTraj s3tm1 = new ChoreoTraj(
 	    "s3tm1",
 	    OptionalInt.empty(),
-	    1.40014,
+	    1.61853,
 	    new Pose2d(12.9, 7.45, Rotation2d.fromRadians(0)),
 	    new Pose2d(14.85, 2.4, Rotation2d.fromRadians(2.42))
 	);
 	public static final ChoreoTraj s3tm2 = new ChoreoTraj(
 	    "s3tm2",
 	    OptionalInt.empty(),
-	    1.18242,
+	    1.32075,
 	    new Pose2d(12.9, 7.45, Rotation2d.fromRadians(0)),
 	    new Pose2d(14.4, 4, Rotation2d.fromRadians(3.142))
 	);
 	public static final ChoreoTraj s3tm3 = new ChoreoTraj(
 	    "s3tm3",
 	    OptionalInt.empty(),
-	    0.91781,
+	    1.36919,
 	    new Pose2d(12.9, 7.45, Rotation2d.fromRadians(0)),
 	    new Pose2d(14.85, 6.35, Rotation2d.fromRadians(-2.425))
 	);
 	public static final ChoreoTraj test = new ChoreoTraj(
 	    "test",
 	    OptionalInt.empty(),
-	    0.58361,
+	    0.58717,
 	    new Pose2d(14, 6, Rotation2d.fromRadians(0)),
 	    new Pose2d(15, 6, Rotation2d.fromRadians(0))
 	);

@@ -27,8 +27,8 @@ import frc.robot.subsystems.ShooterSubsystem;
 public class RobotContainer {
 
   XboxController driver = new XboxController(0);
-  //XboxController operator = new XboxController(1);
-  Autos autos = new Autos();
+  XboxController operator = new XboxController(1);
+  Autos autos = new Autos(driveSub);
   double deadband = 0.03;
   double slow = 1.5;
 
@@ -54,7 +54,7 @@ public class RobotContainer {
   public RobotContainer() {
 
 
-    configureBindings();
+    configureBindings(); 
 
     driveSub.setDefaultCommand(
       new RunCommand(() -> 
@@ -63,13 +63,21 @@ public class RobotContainer {
         -getAxis(driver,0, deadband)/slow,
         -getAxis(driver,4, deadband)/slow, 
         driver.getRawButton(6)) , driveSub));
+        
 
    // beltSub.setDefaultCommand(new BeltCmd(beltSub, 0.5));
   }
 
   private void configureBindings() {
-        new JoystickButton(driver, 5).whileTrue(new RunCommand(() -> driveSub.resetGyro(), driveSub));
-        new JoystickButton(driver, 1).whileTrue(autos.test("s2tm2"));
+    new JoystickButton(driver, 5).whileTrue(new RunCommand(() -> driveSub.resetGyro(), driveSub));
+    new JoystickButton(driver, 1).whileTrue(new RunCommand(() -> driveSub.rearLeft.setDrive(-1), driveSub));
+    new JoystickButton(driver, 1).whileTrue(autos.test("test"));
+    new JoystickButton(driver, 2).whileTrue(autos.test("s2tm2"));
+
+        /* 
+        new JoystickButton(driver, 4).whileTrue(new RunCommand(() -> driveSub.rearLeft.setDrive(1), driveSub));
+        new JoystickButton(driver, 3).whileTrue(new RunCommand(() -> driveSub.rearLeft.setDrive(0), driveSub));
+*/
     /* 
        new JoystickButton(driver, 2).whileTrue(new RunCommand(() -> driveSub.drive(
       -MathUtil.applyDeadband(driver.getLeftY()/slow, OIConstants.kDriveDeadband),
@@ -84,19 +92,22 @@ public class RobotContainer {
       )));
       */
       /* 
-      new JoystickButton(operator, 0).whileTrue(new IntakeCmd(intakeSub, 0.5)); 
+      Operator Controls
+      new JoystickButton(operator, 0).whileTrue(new IntakeCmd(intakeSub, 0.5)); // change to intakeCycleCmd
       //There's also intake pid
       new JoystickButton(operator, 1).whileTrue(new ShooterCmd(shooterSub, 0.5));
       new JoystickButton(operator, 2).whileTrue(new ShooterPIDCmd(shooterSub, 90)); //PID
       new JoystickButton(operator, 3).whileTrue(new ShooterPIDCmd(shooterSub, 90, 90)); //servo
       new JoystickButton(operator, 4).whileTrue(new ClimbPIDcmd(climbSub, 90));
       */
-  }
+
+    }
 
   
 
   public Command getAutonomousCommand() {
-    return autos.test("s2tm2") ; 
+   // return autos.test("s2tm2") ; 
+    return null;
   }
 
   

@@ -80,6 +80,14 @@ public class SwerveModule {
 
     }
 
+    public void setTurning(double speed){
+        turnSpark.set(speed);
+    }
+
+    public void setDrive(double speed){
+        driveSpark.set(speed);
+    }
+
     public void resetEncoders(){
         drivingEncoder.setPosition(0);
     }

@@ -17,6 +17,7 @@ import edu.wpi.first.math.kinematics.SwerveModulePosition;
 import edu.wpi.first.math.kinematics.SwerveModuleState;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
+import frc.robot.Constants;
 import frc.robot.Constants.DriveConstants;
 
 public class Drivesubsystem extends SubsystemBase{
@@ -57,6 +58,7 @@ public class Drivesubsystem extends SubsystemBase{
         //Constructor
         public Drivesubsystem(){
                 HAL.report(tResourceType.kResourceType_RobotDrive, tInstances.kRobotDriveSwerve_MaxSwerve);
+                headingController.enableContinuousInput(-Math.PI, Math.PI);
         }
 
 
@@ -68,6 +70,7 @@ public class Drivesubsystem extends SubsystemBase{
             getSwervePos()
             );
             SmartDashboard.putNumber("Robot Heading ", getHeading());
+            SmartDashboard.putString("pose",""+ getPose());
         }
 
 
@@ -188,6 +191,7 @@ public class Drivesubsystem extends SubsystemBase{
                 pose
             );
         }
+
 //---------------------------------------------------------------------------------
 //      Pose/Position and Speed related setters
     public void setModuleStates(SwerveModuleState[] desiredStates) {
@@ -199,12 +203,14 @@ public class Drivesubsystem extends SubsystemBase{
             rearRight.setDesiredState(desiredStates[3]);
     }
 
+
+
 //---------------------------------------------------------------------------------
 //           Autonomous related functions
  public void followTrajectory(SwerveSample sample) {
         // Get the current pose of the robot
         Pose2d pose = getPose();
-
+        SmartDashboard.putString("sample", "" + sample.omega);
         // Generate the next speeds for the robot
         ChassisSpeeds speeds = new ChassisSpeeds(
             sample.vx + xController.calculate(pose.getX(), sample.x),
@@ -212,7 +218,21 @@ public class Drivesubsystem extends SubsystemBase{
             sample.omega + headingController.calculate(pose.getRotation().getRadians(), sample.heading)
         );
 
-        // Apply the generated speeds
-        drive(speeds.vxMetersPerSecond,speeds.vyMetersPerSecond,speeds.omegaRadiansPerSecond,true);
+ 
+            drive(speeds.vxMetersPerSecond, speeds.vyMetersPerSecond, speeds.omegaRadiansPerSecond, true);
+        SmartDashboard.putString("xspeed", "" + speeds.vxMetersPerSecond);
+
     }
+    public void autoResetGyo(Pose2d pose2d){
+        resetGyro();
+        resetOdometry(pose2d);
+    }
+
+        public void setModuleStates(ChassisSpeeds chassisSpeeds) {
+            Math.hypot(chassisSpeeds.vxMetersPerSecond, chassisSpeeds.vyMetersPerSecond);
+            ChassisSpeeds targetSpeeds = ChassisSpeeds.discretize(chassisSpeeds, 0.02);
+            SwerveModuleState[] swerveModuleStates =
+                Constants.DriveConstants.kDriveKinematics.toSwerveModuleStates(targetSpeeds);
+            setModuleStates(swerveModuleStates);
+        }
 }

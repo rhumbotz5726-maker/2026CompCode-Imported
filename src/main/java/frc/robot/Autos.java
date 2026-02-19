@@ -1,25 +1,38 @@
 package frc.robot;
 
+import java.util.Optional;
+
+import choreo.Choreo;
 import choreo.auto.AutoFactory;
+import choreo.trajectory.SwerveSample;
+import choreo.trajectory.Trajectory;
+import edu.wpi.first.math.geometry.Pose2d;
+import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.Commands;
+import edu.wpi.first.wpilibj2.command.PrintCommand;
+import edu.wpi.first.wpilibj2.command.RunCommand;
+import edu.wpi.first.wpilibj2.command.Subsystem;
 import frc.robot.commands.ClimbPIDcmd;
 import frc.robot.commands.IntakeCmd;
 import frc.robot.commands.ShooterLineUpCmd;
 import frc.robot.commands.ShooterPIDCmd;
-import frc.robot.subsystems.IntakeSubsystem;
+import frc.robot.subsystems.Drivesubsystem;
 
 public class Autos {
+    public static Drivesubsystem driveSub;
 
-    private final IntakeSubsystem intakeSub = new IntakeSubsystem();
-
+    public Autos(Drivesubsystem drivesubsystem){
+        this.driveSub=drivesubsystem;
+    }
+  
     AutoFactory autoFactory =new AutoFactory(
     //these are method pointers they basically tell the code "Hey the method you want is right here"
-        RobotContainer.driveSub::getPose,
-        RobotContainer.driveSub::resetOdometry,
-        RobotContainer.driveSub::followTrajectory,
+        driveSub::getPose,
+        driveSub::resetOdometry,
+        driveSub::followTrajectory,
         false, 
-        RobotContainer.driveSub
+        driveSub
     );
 
     //this will be an example for like the lineup n stuff
@@ -33,6 +46,7 @@ public class Autos {
 
 
     public Command shootThenClimb(String start, String mid, String end){
+        autoFactory.resetOdometry(start + "t" + mid);
         return Commands.sequence(
             autoFactory.trajectoryCmd(start+"t"+mid),
             new ShooterLineUpCmd(),
@@ -41,19 +55,29 @@ public class Autos {
         );
     }
 
+    public Command test(String name){
+        
+    
+        return Commands.sequence(
+              autoFactory.resetOdometry(name),
+              autoFactory.trajectoryCmd(name)
+            );
+    }
      public Command shoot(String start, String mid){
+        autoFactory.resetOdometry(start + "t" + mid);
         return Commands.sequence(
               autoFactory.trajectoryCmd(start+"t"+mid),
             new ShooterLineUpCmd()
             );
     }
 
+    /*
      public Command shootReloadClimb(String start,String mid, String reload, String end){
         return Commands.sequence(
             autoFactory.trajectoryCmd(start+"t"+mid),
             new ShooterLineUpCmd(),
             autoFactory.trajectoryCmd(mid+"t"+reload),
-            new IntakeCmd(intakeSub, 0.5),
+            new IntakeCmd(.intakeSub, 0.5),
             autoFactory.trajectoryCmd(reload+"t"+mid),
             new ShooterLineUpCmd(),
             autoFactory.trajectoryCmd(mid+"t"+end),
@@ -70,9 +94,8 @@ public class Autos {
             autoFactory.trajectoryCmd(reload+"t"+mid),
             new ShooterLineUpCmd()
         );
+
     }
-
-
-    
+        */
     
 }

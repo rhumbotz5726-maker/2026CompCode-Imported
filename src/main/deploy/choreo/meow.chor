@@ -1,5 +1,5 @@
 {
- "name":"Paths",
+ "name":"meow",
  "version":2,
  "type":"Swerve",
  "variables":{
@@ -164,64 +164,64 @@
  "config":{
   "frontLeft":{
    "x":{
-    "exp":"11 in",
-    "val":0.2794
+    "exp":"12 in",
+    "val":0.30479999999999996
    },
    "y":{
-    "exp":"11 in",
-    "val":0.2794
+    "exp":"12 in",
+    "val":0.30479999999999996
    }
   },
   "backLeft":{
    "x":{
-    "exp":"-11 in",
-    "val":-0.2794
+    "exp":"-12 in",
+    "val":-0.30479999999999996
    },
    "y":{
-    "exp":"11 in",
-    "val":0.2794
+    "exp":"-12 in",
+    "val":-0.30479999999999996
    }
   },
   "mass":{
-   "exp":"150 lbs",
-   "val":68.0388555
+   "exp":"56.7 kg",
+   "val":56.7
   },
   "inertia":{
-   "exp":"6 kg m ^ 2",
-   "val":6.0
+   "exp":"6.883 kg m ^ 2",
+   "val":6.883
   },
   "gearing":{
-   "exp":"6.5",
-   "val":6.5
+   "exp":"4.71",
+   "val":4.71
   },
   "radius":{
-   "exp":"2 in",
-   "val":0.0508
+   "exp":"1.5 in",
+   "val":0.038099999999999995
   },
   "vmax":{
-   "exp":"6000 RPM",
-   "val":628.3185307179587
+   "exp":"5676 RPM",
+   "val":594.3893300591889
   },
   "tmax":{
-   "exp":"1.2 N * m",
-   "val":1.2
+   "exp":"2.6 N * m",
+   "val":2.6
   },
   "cof":{
-   "exp":"1.5",
-   "val":1.5
+   "exp":"1.2",
+   "val":1.2
   },
   "bumper":{
    "front":{
-    "exp":"16 in",
-    "val":0.4064
+    "exp":"18 in",
+    "val":0.4572
    },
    "side":{
-    "exp":"16 in",
-    "val":0.4064
+    "exp":"18 in",
+    "val":0.4572
    },
    "back":{
-    "exp":"16 in",
-    "val":0.4064
+    "exp":"18 in",
+    "val":0.4572
    }
   },
   "differentialTrackWidth":{
@@ -231,7 +231,7 @@
  },
  "generationFeatures":[],
  "codegen":{
-  "root":null,
+  "root":"..\\..\\java\\frc\\robot\\bruh",
   "genVars":true,
   "genTrajData":true,
   "useChoreoLib":true

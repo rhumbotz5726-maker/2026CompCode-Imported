@@ -28,15 +28,16 @@ public class RobotContainer {
 
   XboxController driver = new XboxController(0);
   XboxController operator = new XboxController(1);
-  Autos autos = new Autos(driveSub);
+  
   double deadband = 0.03;
   double slow = 1.5;
 
   public static final Drivesubsystem driveSub = new Drivesubsystem();
   //private final BeltSubsystem beltSub = new BeltSubsystem();
   //private final IntakeSubsystem intakeSub = new IntakeSubsystem();
- // private final ClimbSubsystem climbSub = new ClimbSubsystem();
-  //private final ShooterSubsystem shooterSub = new ShooterSubsystem();
+  private final ClimbSubsystem climbSub = new ClimbSubsystem();
+  private final ShooterSubsystem shooterSub = new ShooterSubsystem();
+  Autos autos = new Autos(driveSub, shooterSub, climbSub);
 
 
 
@@ -96,7 +97,7 @@ public class RobotContainer {
       new JoystickButton(operator, 0).whileTrue(new IntakeCmd(intakeSub, 0.5)); // change to intakeCycleCmd
       //There's also intake pid
       new JoystickButton(operator, 1).whileTrue(new ShooterCmd(shooterSub, 0.5));
-      new JoystickButton(operator, 2).whileTrue(new ShooterPIDCmd(shooterSub, 90)); //PID
+      new JoystickButton(operator, 2).whileTrue(new ShooterPIDCmd(shooterSub, 0, getTX())); //PID with limelight
       new JoystickButton(operator, 3).whileTrue(new ShooterPIDCmd(shooterSub, 90, 90)); //servo
       new JoystickButton(operator, 4).whileTrue(new ClimbPIDcmd(climbSub, 90));
       */

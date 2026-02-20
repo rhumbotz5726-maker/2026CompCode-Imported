@@ -24,13 +24,13 @@ public class ClimbPIDcmd extends Command{
 
     @Override
     public void execute() {
-        climbSub.setSpeed(controller.calculate(climbSub.getPos()));
+        climbSub.setSpeed(1, controller.calculate(climbSub.getPosOne()));
         
     }
 
     @Override
     public boolean isFinished() {
-        return Math.abs(climbSub.getPos() - setpoint) < tolerance;
+        return Math.abs(climbSub.getPosOne() - setpoint) < tolerance;
     }
 
     

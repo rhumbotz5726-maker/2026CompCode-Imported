@@ -17,13 +17,19 @@ import frc.robot.commands.ClimbPIDcmd;
 import frc.robot.commands.IntakeCmd;
 import frc.robot.commands.ShooterLineUpCmd;
 import frc.robot.commands.ShooterPIDCmd;
+import frc.robot.subsystems.ClimbSubsystem;
 import frc.robot.subsystems.Drivesubsystem;
+import frc.robot.subsystems.ShooterSubsystem;
 
 public class Autos {
     public static Drivesubsystem driveSub;
+    public static ShooterSubsystem shooterSub;
+    public static ClimbSubsystem climbSub;
 
-    public Autos(Drivesubsystem drivesubsystem){
-        this.driveSub=drivesubsystem;
+    public Autos(Drivesubsystem drivesubsystem, ShooterSubsystem shooterSub, ClimbSubsystem climbSub){
+        this.driveSub = drivesubsystem;
+        this.shooterSub = shooterSub;
+        this.climbSub = climbSub;
     }
   
     AutoFactory autoFactory =new AutoFactory(
@@ -39,7 +45,7 @@ public class Autos {
     public Command midToLineup(){
         return Commands.sequence(
         autoFactory.resetOdometry("go to middle"),
-         new ShooterPIDCmd(null, 0),
+         new ShooterLineUpCmd(shooterSub, 90),
         autoFactory.resetOdometry("go back to start"),
         Commands.runOnce(() -> System.out.println("reset")));
     }
@@ -49,10 +55,10 @@ public class Autos {
         autoFactory.resetOdometry(start + "t" + mid);
         return Commands.sequence(
             autoFactory.trajectoryCmd(start+"t"+mid),
-            new ShooterLineUpCmd(),
+            new ShooterLineUpCmd(shooterSub, 90),
             autoFactory.trajectoryCmd(start+"t"+end),
-            new ClimbPIDcmd(null, 0)
-        );
+            new ClimbPIDcmd(climbSub, 0)
+        ); // change setpoints 
     }
 
     public Command test(String name){
@@ -66,8 +72,8 @@ public class Autos {
      public Command shoot(String start, String mid){
         autoFactory.resetOdometry(start + "t" + mid);
         return Commands.sequence(
-              autoFactory.trajectoryCmd(start+"t"+mid),
-            new ShooterLineUpCmd()
+            autoFactory.trajectoryCmd(start+"t"+mid),
+            new ShooterLineUpCmd(shooterSub, 90)
             );
     }
 

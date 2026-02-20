@@ -98,7 +98,10 @@ public final class Constants {
   public static final class intakeConstants{
     public static double INTAKE_EXTEND_SETPOINT = 1;
     public static double INTAKE_PUTBACKf_SETPOINT = 1;
+  }
 
-
+  public static final class climbConstants {
+    public static double CLIMB_EXTEND_SETPOINT = 1;
+    public static double CLIMB_RETRACT_SETPOINT = 1;
   }
 }

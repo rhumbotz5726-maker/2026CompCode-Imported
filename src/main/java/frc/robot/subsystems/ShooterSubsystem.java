@@ -15,7 +15,6 @@ public class ShooterSubsystem extends SubsystemBase{
     SparkMax beltMotor1 = new SparkMax(7, MotorType.kBrushless); //Belt
     SparkMax beltMotor2 = new SparkMax(8, MotorType.kBrushless); //Belt
 
-    Servo servo = new Servo(0);
     SparkAbsoluteEncoder encoder = turretMotor.getAbsoluteEncoder();
 
     public void setShooterSpeed(double speed) {
@@ -29,14 +28,6 @@ public class ShooterSubsystem extends SubsystemBase{
     public void setBeltSpeed(double speed) {
         beltMotor1.set(speed);
         beltMotor2.set(speed);
-    }
-
-    public void setServo(double point){
-        servo.set(point);
-    }
-
-    public double getServo(){
-        return servo.get();
     }
 
     public double getPos(){

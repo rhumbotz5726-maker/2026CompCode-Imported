@@ -101,7 +101,7 @@ public final class Constants {
   }
 
   public static final class climbConstants {
-    public static double CLIMB_EXTEND_SETPOINT = 1;
-    public static double CLIMB_RETRACT_SETPOINT = 1;
+    public static float CLIMB_EXTEND_SETPOINT = 1;
+    public static float CLIMB_RETRACT_SETPOINT = 1;
   }
 }

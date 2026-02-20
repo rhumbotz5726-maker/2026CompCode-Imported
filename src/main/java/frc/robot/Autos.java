@@ -57,7 +57,7 @@ public class Autos {
             autoFactory.trajectoryCmd(start+"t"+mid),
             new ShooterLineUpCmd(shooterSub, 90),
             autoFactory.trajectoryCmd(start+"t"+end),
-            new ClimbPIDcmd(climbSub, 0)
+            new ClimbPIDcmd(climbSub, 0,1)
         ); // change setpoints 
     }
 

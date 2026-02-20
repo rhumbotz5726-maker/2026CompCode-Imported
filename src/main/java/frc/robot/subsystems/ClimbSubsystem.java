@@ -34,7 +34,7 @@ public class ClimbSubsystem extends SubsystemBase{
     }
 
     public double getPosTwo() {
-        return encoder1.getPosition();
+        return encoder2.getPosition();
     }
 
     public void periodic() {

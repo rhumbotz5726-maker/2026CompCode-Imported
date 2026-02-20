@@ -7,32 +7,32 @@ import frc.robot.Constants;
 import frc.robot.subsystems.IntakeSubsystem;
 
 public class IntakeCycleCmd extends Command {
-    private final IntakeSubsystem sub;
-    public IntakeCycleCmd(IntakeSubsystem sub){
-            this.sub = sub;
+    private IntakeSubsystem intakeSub;
+
+    public IntakeCycleCmd(IntakeSubsystem intakeSub){
+            this.intakeSub = intakeSub;
     }
 
     @Override
     public void initialize() {
         Commands.runOnce(
             ()-> {Commands.sequence(
-                new IntakePIDCmd(sub, Constants.intakeConstants.INTAKE_EXTEND_SETPOINT),
-                new IntakeCmd(sub, 0.8)
-            );}
-        , sub
-        );
+                    new IntakePIDCmd(intakeSub, Constants.intakeConstants.INTAKE_EXTEND_SETPOINT));}, 
+                intakeSub);
+    }
+
+    @Override
+    public void execute() {
+        new IntakeCmd(intakeSub, 0.8);
     }
 
     @Override
     public void end(boolean interrupted) {
         Commands.runOnce(
             ()-> {Commands.sequence(
-                new IntakeCmd(sub, 0),
-                new IntakePIDCmd(sub, Constants.intakeConstants.INTAKE_PUTBACKf_SETPOINT)
-                
-            );}
-        , sub
-        );
+                    new IntakeCmd(intakeSub, 0),
+                    new IntakePIDCmd(intakeSub, Constants.intakeConstants.INTAKE_PUTBACKf_SETPOINT));}, 
+                intakeSub);
     }
     
 }

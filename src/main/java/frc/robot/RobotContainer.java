@@ -82,8 +82,6 @@ public class RobotContainer {
         getAxis(operator, 0, deadband)/slow),
         //run command requirements
         operatorSub));
-     
-        
 
   }
 
@@ -92,13 +90,6 @@ public class RobotContainer {
       //operatorControls();
     
     }
-
-  
-
-  public Command getAutonomousCommand() {
-    return null;
-  }
-
 
   public void driverControls(){
     new JoystickButton(driver, 5).whileTrue(new RunCommand(() -> driveSub.resetGyro(), driveSub));
@@ -109,10 +100,9 @@ public class RobotContainer {
   public void operatorControls(){
       new JoystickButton(operator, 0).whileTrue(new IntakeCmd(intakeSub, 0.5)); // change to intakeCycleCmd
       new JoystickButton(operator, 1).whileTrue(new ShooterCmd(shooterSub, 0.5));
-      new JoystickButton(operator, 2).whileTrue(new ShooterPIDCmd(shooterSub, 0, getTX())); //PID with limelight
-      new JoystickButton(operator, 3).whileTrue(new ShooterPIDCmd(shooterSub, 90, 90)); //servo
-      new JoystickButton(operator, 4).whileTrue(new ClimbPIDcmd(climbSub, 90));
-      */
+     // new JoystickButton(operator, 2).whileTrue(new ShooterPIDCmd(shooterSub, 0, getTX())); //PID with limelight
+     // new JoystickButton(operator, 4).whileTrue(new ClimbPIDcmd(climbSub, 90));
+      
 
     }
 

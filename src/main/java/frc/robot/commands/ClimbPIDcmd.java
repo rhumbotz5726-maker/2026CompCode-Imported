@@ -9,12 +9,14 @@ public class ClimbPIDcmd extends Command{
     private ClimbSubsystem climbSub;
     private float setpoint;
     private PIDController controller;
+    private int motorNumber;
     private float tolerance = 0.05f;
 
-    public ClimbPIDcmd(ClimbSubsystem climbSub, float setpoint){
+    public ClimbPIDcmd(ClimbSubsystem climbSub, float setpoint,int motorNumber){
         this.climbSub = climbSub;
         this.setpoint = setpoint;
         controller = new PIDController(1, 0, 0);
+        this.motorNumber = motorNumber;
     }
 
     @Override
@@ -24,7 +26,7 @@ public class ClimbPIDcmd extends Command{
 
     @Override
     public void execute() {
-        climbSub.setSpeed(1, controller.calculate(climbSub.getPosOne()));
+        climbSub.setSpeed(motorNumber, controller.calculate(climbSub.getPosOne()));
         
     }
 

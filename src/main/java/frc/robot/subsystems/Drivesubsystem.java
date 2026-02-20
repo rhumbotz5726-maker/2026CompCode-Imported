@@ -101,14 +101,13 @@ public class Drivesubsystem extends SubsystemBase{
         SwerveDriveKinematics.desaturateWheelSpeeds(
             swerveModuleStates, DriveConstants.kMaxSpeedMetersPerSecond);
 
-        setModuleStates(swerveModuleStates);    
         //if the robot is slow delete the code line above and put this in place
-        /* 
+         
         frontLeft.setDesiredState(swerveModuleStates[0]);
         frontRight.setDesiredState(swerveModuleStates[1]);
         rearLeft.setDesiredState(swerveModuleStates[2]);
         rearRight.setDesiredState(swerveModuleStates[3]);
-        */
+        
     }
 
     //Sets the wheels in an x formation

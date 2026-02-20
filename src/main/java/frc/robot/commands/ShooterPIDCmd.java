@@ -6,7 +6,7 @@ import frc.robot.subsystems.ShooterSubsystem;
 
 public class ShooterPIDCmd extends Command{
     private ShooterSubsystem shooterSub;
-    private double setpoint; 
+    private double setpoint = 0; 
     private PIDController controller;
     private double tx;
 
@@ -17,6 +17,12 @@ public class ShooterPIDCmd extends Command{
         this.controller = new PIDController(1, 0, 0);
     }
 
+ 
+    public ShooterPIDCmd (ShooterSubsystem shooterSub, double tx) {
+        this.shooterSub = shooterSub;
+        this.tx = tx;
+        this.controller = new PIDController(1, 0, 0);
+    }
 
     @Override
     public void initialize() {

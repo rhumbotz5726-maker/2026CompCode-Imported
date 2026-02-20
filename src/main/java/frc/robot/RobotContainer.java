@@ -20,8 +20,10 @@ import frc.robot.commands.ShooterCmd;
 import frc.robot.commands.ShooterPIDCmd;
 import frc.robot.subsystems.BeltSubsystem;
 import frc.robot.subsystems.ClimbSubsystem;
+import frc.robot.subsystems.DriverSub;
 import frc.robot.subsystems.Drivesubsystem;
 import frc.robot.subsystems.IntakeSubsystem;
+import frc.robot.subsystems.OperatorSub;
 import frc.robot.subsystems.ShooterSubsystem;
 
 public class RobotContainer {
@@ -33,12 +35,13 @@ public class RobotContainer {
   double slow = 1.5;
 
   public static final Drivesubsystem driveSub = new Drivesubsystem();
-  //private final BeltSubsystem beltSub = new BeltSubsystem();
-  //private final IntakeSubsystem intakeSub = new IntakeSubsystem();
+  private final BeltSubsystem beltSub = new BeltSubsystem();
+  private final IntakeSubsystem intakeSub = new IntakeSubsystem();
   private final ClimbSubsystem climbSub = new ClimbSubsystem();
   private final ShooterSubsystem shooterSub = new ShooterSubsystem();
   Autos autos = new Autos(driveSub, shooterSub, climbSub);
-
+  private final DriverSub driverSub = new DriverSub(driveSub, intakeSub);
+  private final OperatorSub operatorSub = new OperatorSub(beltSub, climbSub, shooterSub);
 
 
 
@@ -57,51 +60,60 @@ public class RobotContainer {
 
     configureBindings(); 
 
-    driveSub.setDefaultCommand(
-      new RunCommand(() -> 
-      driveSub.drive(
+  
+    driverSub.setDefaultCommand(new RunCommand(() -> 
+    driveSub.drive(
+        //y
         -getAxis(driver,1, deadband)/slow, 
+        //x
         -getAxis(driver,0, deadband)/slow,
+        //rot
         -getAxis(driver,4, deadband)/slow, 
-        driver.getRawButton(6)) , driveSub));
+        //field orient
+        driver.getRawButton(6)),
+        //run command requirements
+        driverSub));
+
+    operatorSub.setDefaultCommand(new RunCommand(
+      ()-> operatorSub.operatorControls(
+        //belt
+        getAxis(operator, 4, deadband)/slow,
+        //shooter
+        getAxis(operator, 0, deadband)/slow),
+        //run command requirements
+        operatorSub));
+     
         
 
-   // beltSub.setDefaultCommand(new BeltCmd(beltSub, 0.5));
   }
 
   private void configureBindings() {
+      driverControls();
+      //operatorControls();
+    
+    }
+
+  
+
+  public Command getAutonomousCommand() {
+    return null;
+  }
+
+
+  public void driverControls(){
     new JoystickButton(driver, 5).whileTrue(new RunCommand(() -> driveSub.resetGyro(), driveSub));
-    new JoystickButton(driver, 1).whileTrue(new RunCommand(() -> driveSub.rearLeft.setDrive(-1), driveSub));
     new JoystickButton(driver, 1).whileTrue(autos.test("test"));
     new JoystickButton(driver, 2).whileTrue(autos.test("s2tm2"));
+  }
 
-        /* 
-        new JoystickButton(driver, 4).whileTrue(new RunCommand(() -> driveSub.rearLeft.setDrive(1), driveSub));
-        new JoystickButton(driver, 3).whileTrue(new RunCommand(() -> driveSub.rearLeft.setDrive(0), driveSub));
-*/
-    /* 
-       new JoystickButton(driver, 2).whileTrue(new RunCommand(() -> driveSub.drive(
-      -MathUtil.applyDeadband(driver.getLeftY()/slow, OIConstants.kDriveDeadband),
-      -MathUtil.applyDeadband(driver.getLeftX()/slow, OIConstants.kDriveDeadband),
-         -(LimelightHelpers.getTX("")+0) * 0.015, false), driveSub));
-     
-    new JoystickButton(driver, 3).whileTrue(new RunCommand(() -> driveSub.drive(
-     getTY(-2,-0.05),
-      -MathUtil.applyDeadband(driver.getLeftX()/slow, OIConstants.kDriveDeadband), 
-      getTX(0, 0.015), 
-        false
-      )));
-      */
-      /* 
-      Operator Controls
+  public void operatorControls(){
       new JoystickButton(operator, 0).whileTrue(new IntakeCmd(intakeSub, 0.5)); // change to intakeCycleCmd
-      //There's also intake pid
       new JoystickButton(operator, 1).whileTrue(new ShooterCmd(shooterSub, 0.5));
       new JoystickButton(operator, 2).whileTrue(new ShooterPIDCmd(shooterSub, 0, getTX())); //PID with limelight
       new JoystickButton(operator, 3).whileTrue(new ShooterPIDCmd(shooterSub, 90, 90)); //servo
       new JoystickButton(operator, 4).whileTrue(new ClimbPIDcmd(climbSub, 90));
       */
-    
+
     }
 
   

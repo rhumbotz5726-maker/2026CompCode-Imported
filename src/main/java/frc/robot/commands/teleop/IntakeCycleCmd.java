@@ -23,6 +23,9 @@ public class IntakeCycleCmd extends Command {
 
     @Override
     public void execute() {
+        Commands.run(        ()-> {Commands.sequence(
+                    new IntakePIDCmd(intakeSub, Constants.intakeConstants.INTAKE_EXTEND_SETPOINT));}, 
+                intakeSub);
         new IntakeCmd(intakeSub, 0.8);
     }
 

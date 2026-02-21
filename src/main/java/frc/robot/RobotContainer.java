@@ -78,7 +78,7 @@ public class RobotContainer {
       ()-> operatorSub.operatorControls(
         //belt
         getAxis(operator, 4, deadband)/slow,
-        //shooter
+        //turret
         getAxis(operator, 0, deadband)/slow),
         //run command requirements
         operatorSub));
@@ -100,6 +100,7 @@ public class RobotContainer {
   public void operatorControls(){
       new JoystickButton(operator, 0).whileTrue(new IntakeCmd(intakeSub, 0.5)); // change to intakeCycleCmd
       new JoystickButton(operator, 1).whileTrue(new ShooterCmd(shooterSub, 0.5));
+      new JoystickButton(operator, 3).whileTrue(new ClimbPIDcmd(climbSub, 9, 1)); // play with this to find out the correct constant for climb setpoint
      // new JoystickButton(operator, 2).whileTrue(new ShooterPIDCmd(shooterSub, 0, getTX())); //PID with limelight
      // new JoystickButton(operator, 4).whileTrue(new ClimbPIDcmd(climbSub, 90));
       

@@ -12,8 +12,8 @@ import edu.wpi.first.wpilibj2.command.SubsystemBase;
 
 public class IntakeSubsystem extends SubsystemBase{
 
-    SparkMax intakeMotor = new SparkMax(3, MotorType.kBrushless);
-    SparkMax pidMotor = new SparkMax(4, MotorType.kBrushless);
+    SparkMax intakeMotor = new SparkMax(9, MotorType.kBrushless);
+    SparkMax pidMotor = new SparkMax(10, MotorType.kBrushless);
     SparkAbsoluteEncoder encoder = pidMotor.getAbsoluteEncoder();
 
     public void intakeSetSpeed(double speed) {

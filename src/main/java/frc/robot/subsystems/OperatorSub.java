@@ -18,7 +18,7 @@ public class OperatorSub extends SubsystemBase{
 
     public void operatorControls(double beltSpeed, double shooterSpeed){
         moveBelt(beltSpeed);
-        moveShooter(shooterSpeed);
+        moveTurret(shooterSpeed);
 
     }
     public void moveBelt(double speed){
@@ -26,7 +26,7 @@ public class OperatorSub extends SubsystemBase{
         
     }
 
-    public void moveShooter(double speed){
+    public void moveTurret(double speed){
         shooterSubsystem.setTurretSpeed(speed);
     }
     

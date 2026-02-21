@@ -10,8 +10,8 @@ import edu.wpi.first.wpilibj2.command.SubsystemBase;
 
 public class ClimbSubsystem extends SubsystemBase{
     
-    SparkMax climbMotor1 = new SparkMax(2, MotorType.kBrushless);
-    SparkMax climbMotor2 = new SparkMax(5, MotorType.kBrushless);
+    SparkMax climbMotor1 = new SparkMax(16, MotorType.kBrushless);
+    SparkMax climbMotor2 = new SparkMax(17, MotorType.kBrushless);
     AbsoluteEncoder encoder1 = climbMotor1.getAbsoluteEncoder();
     AbsoluteEncoder encoder2 = climbMotor2.getAbsoluteEncoder();
 

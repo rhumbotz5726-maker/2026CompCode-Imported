@@ -23,7 +23,7 @@ import frc.robot.subsystems.ClimbSubsystem;
 import frc.robot.subsystems.DriverSub;
 import frc.robot.subsystems.Drivesubsystem;
 import frc.robot.subsystems.IntakeSubsystem;
-import frc.robot.subsystems.OperatorSub;
+//import frc.robot.subsystems.OperatorSub;
 import frc.robot.subsystems.ShooterSubsystem;
 
 public class RobotContainer {
@@ -32,16 +32,16 @@ public class RobotContainer {
   XboxController operator = new XboxController(1);
   
   double deadband = 0.03;
-  double slow = 1.5;
+  double slow = 3;
 
   public static final Drivesubsystem driveSub = new Drivesubsystem();
-  private final BeltSubsystem beltSub = new BeltSubsystem();
+  //private final BeltSubsystem beltSub = new BeltSubsystem();
   private final IntakeSubsystem intakeSub = new IntakeSubsystem();
-  private final ClimbSubsystem climbSub = new ClimbSubsystem();
-  private final ShooterSubsystem shooterSub = new ShooterSubsystem();
-  Autos autos = new Autos(driveSub, shooterSub, climbSub);
+  //private final ClimbSubsystem climbSub = new ClimbSubsystem();
+  //private final ShooterSubsystem shooterSub = new ShooterSubsystem();
+  //Autos autos = new Autos(driveSub, shooterSub, climbSub);
   private final DriverSub driverSub = new DriverSub(driveSub, intakeSub);
-  private final OperatorSub operatorSub = new OperatorSub(beltSub, climbSub, shooterSub);
+  //private final OperatorSub operatorSub = new OperatorSub(beltSub, climbSub, shooterSub);
 
 
 
@@ -74,14 +74,14 @@ public class RobotContainer {
         //run command requirements
         driverSub));
 
-    operatorSub.setDefaultCommand(new RunCommand(
+    /*operatorSub.setDefaultCommand(new RunCommand(
       ()-> operatorSub.operatorControls(
         //belt
         getAxis(operator, 4, deadband)/slow,
         //turret
         getAxis(operator, 0, deadband)/slow),
         //run command requirements
-        operatorSub));
+        operatorSub)); */
 
   }
 
@@ -93,19 +93,17 @@ public class RobotContainer {
 
   public void driverControls(){
     new JoystickButton(driver, 5).whileTrue(new RunCommand(() -> driveSub.resetGyro(), driveSub));
-    new JoystickButton(driver, 1).whileTrue(autos.test("test"));
-    new JoystickButton(driver, 2).whileTrue(autos.test("s2tm2"));
+    //new JoystickButton(driver, 1).whileTrue(autos.test("test"));
+    //new JoystickButton(driver, 2).whileTrue(autos.test("s2tm2"));
   }
 
-  public void operatorControls(){
+  /*public void operatorControls(){
       new JoystickButton(operator, 0).whileTrue(new IntakeCmd(intakeSub, 0.5)); // change to intakeCycleCmd
       new JoystickButton(operator, 1).whileTrue(new ShooterCmd(shooterSub, 0.5));
       new JoystickButton(operator, 3).whileTrue(new ClimbPIDcmd(climbSub, 9, 1)); // play with this to find out the correct constant for climb setpoint
      // new JoystickButton(operator, 2).whileTrue(new ShooterPIDCmd(shooterSub, 0, getTX())); //PID with limelight
      // new JoystickButton(operator, 4).whileTrue(new ClimbPIDcmd(climbSub, 90));
-      
-
-    }
+    }*/
 
   
 
@@ -120,6 +118,22 @@ public class RobotContainer {
       return LimelightHelpers.getTY("");
     } else {
       return (LimelightHelpers.getTY("")+offset) * scale;
+    }
+  }
+
+  public double getTY(int ID,double offset,double scale){
+    if(LimelightHelpers.getFiducialID("") == ID){
+      return getTY(offset, scale);
+    } else {
+      return 0;
+    }
+  }
+
+   public double getTX(int ID,double offset,double scale){
+    if(LimelightHelpers.getFiducialID("") == ID){
+      return getTX(offset, scale);
+    } else {
+      return 0;
     }
   }
 

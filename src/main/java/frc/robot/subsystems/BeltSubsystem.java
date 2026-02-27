@@ -11,5 +11,5 @@ public class BeltSubsystem extends SubsystemBase{
 
     public void setSpeed(double speed) {
         beltMotor.set(speed);
-    }
+    } 
 }

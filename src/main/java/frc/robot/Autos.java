@@ -13,7 +13,7 @@ import edu.wpi.first.wpilibj2.command.Commands;
 import edu.wpi.first.wpilibj2.command.PrintCommand;
 import edu.wpi.first.wpilibj2.command.RunCommand;
 import edu.wpi.first.wpilibj2.command.Subsystem;
-import frc.robot.commands.ClimbPIDcmd;
+import frc.robot.commands.auto.TimeClimb;
 import frc.robot.commands.IntakeCmd;
 import frc.robot.commands.ShooterLineUpCmd;
 import frc.robot.commands.ShooterPIDCmd;
@@ -57,7 +57,7 @@ public class Autos {
             autoFactory.trajectoryCmd(start+"t"+mid),
             new ShooterLineUpCmd(shooterSub, 90),
             autoFactory.trajectoryCmd(start+"t"+end),
-            new ClimbPIDcmd(climbSub, 0,1)
+            new TimeClimb(climbSub,1)
         ); // change setpoints 
     }
 
@@ -87,7 +87,7 @@ public class Autos {
             autoFactory.trajectoryCmd(reload+"t"+mid),
             new ShooterLineUpCmd(),
             autoFactory.trajectoryCmd(mid+"t"+end),
-            new ClimbPIDcmd(null, 0)
+            new TimeClimb(null, 0)
         );
     }
 

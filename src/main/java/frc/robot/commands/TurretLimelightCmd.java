@@ -4,13 +4,13 @@ import edu.wpi.first.math.controller.PIDController;
 import edu.wpi.first.wpilibj2.command.Command;
 import frc.robot.subsystems.ShooterSubsystem;
 
-public class ShooterPIDCmd extends Command{
+public class TurretLimelightCmd extends Command{
     private ShooterSubsystem shooterSub;
     private double setpoint = 0; 
     private PIDController controller;
     private double tx;
 
-    public ShooterPIDCmd (ShooterSubsystem shooterSub, double setpoint, double tx) {
+    public TurretLimelightCmd (ShooterSubsystem shooterSub, double setpoint, double tx) {
         this.shooterSub = shooterSub;
         this.setpoint = setpoint;
         this.tx = tx;
@@ -18,7 +18,7 @@ public class ShooterPIDCmd extends Command{
     }
 
  
-    public ShooterPIDCmd (ShooterSubsystem shooterSub, double tx) {
+    public TurretLimelightCmd (ShooterSubsystem shooterSub, double tx) {
         this.shooterSub = shooterSub;
         this.tx = tx;
         this.controller = new PIDController(1, 0, 0);

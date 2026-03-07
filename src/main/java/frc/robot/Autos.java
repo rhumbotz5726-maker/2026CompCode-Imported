@@ -14,9 +14,9 @@ import edu.wpi.first.wpilibj2.command.PrintCommand;
 import edu.wpi.first.wpilibj2.command.RunCommand;
 import edu.wpi.first.wpilibj2.command.Subsystem;
 import frc.robot.commands.auto.TimeClimb;
+import frc.robot.commands.auto.TurretPIDCmd;
 import frc.robot.commands.IntakeCmd;
-import frc.robot.commands.ShooterLineUpCmd;
-import frc.robot.commands.ShooterPIDCmd;
+import frc.robot.commands.TurretLimelightCmd;
 import frc.robot.subsystems.ClimbSubsystem;
 import frc.robot.subsystems.Drivesubsystem;
 import frc.robot.subsystems.ShooterSubsystem;
@@ -45,7 +45,7 @@ public class Autos {
     public Command midToLineup(){
         return Commands.sequence(
         autoFactory.resetOdometry("go to middle"),
-         new ShooterLineUpCmd(shooterSub, 90),
+         new TurretPIDCmd(shooterSub, 90),
         autoFactory.resetOdometry("go back to start"),
         Commands.runOnce(() -> System.out.println("reset")));
     }
@@ -55,7 +55,7 @@ public class Autos {
         autoFactory.resetOdometry(start + "t" + mid);
         return Commands.sequence(
             autoFactory.trajectoryCmd(start+"t"+mid),
-            new ShooterLineUpCmd(shooterSub, 90),
+            new TurretPIDCmd(shooterSub, 90),
             autoFactory.trajectoryCmd(start+"t"+end),
             new TimeClimb(climbSub,1)
         ); // change setpoints 
@@ -73,7 +73,7 @@ public class Autos {
         autoFactory.resetOdometry(start + "t" + mid);
         return Commands.sequence(
             autoFactory.trajectoryCmd(start+"t"+mid),
-            new ShooterLineUpCmd(shooterSub, 90)
+            new TurretPIDCmd(shooterSub, 90)
             );
     }
 

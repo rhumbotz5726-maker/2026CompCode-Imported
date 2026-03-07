@@ -16,7 +16,8 @@ import frc.robot.Constants.OIConstants;
 import frc.robot.commands.BeltCmd;
 import frc.robot.commands.IntakeCmd;
 import frc.robot.commands.ShooterCmd;
-import frc.robot.commands.ShooterPIDCmd;
+import frc.robot.commands.TurretLimelightCmd;
+import frc.robot.commands.teleop.ManualClimbCmd;
 import frc.robot.subsystems.BeltSubsystem;
 import frc.robot.subsystems.ClimbSubsystem;
 import frc.robot.subsystems.DriverSub;
@@ -37,7 +38,7 @@ public class RobotContainer {
   //private final BeltSubsystem beltSub = new BeltSubsystem();
   private final IntakeSubsystem intakeSub = new IntakeSubsystem();
   //private final ClimbSubsystem climbSub = new ClimbSubsystem();
-  //private final ShooterSubsystem shooterSub = new ShooterSubsystem();
+  private final ShooterSubsystem shooterSub = new ShooterSubsystem();
   //Autos autos = new Autos(driveSub, shooterSub, climbSub);
   private final DriverSub driverSub = new DriverSub(driveSub, intakeSub);
   //private final OperatorSub operatorSub = new OperatorSub(beltSub, climbSub, shooterSub);
@@ -86,7 +87,7 @@ public class RobotContainer {
 
   private void configureBindings() {
       driverControls();
-      //operatorControls();
+      operatorControls();
     
     }
 
@@ -96,13 +97,13 @@ public class RobotContainer {
     //new JoystickButton(driver, 2).whileTrue(autos.test("s2tm2"));
   }
 
-  /*public void operatorControls(){
-      new JoystickButton(operator, 0).whileTrue(new IntakeCmd(intakeSub, 0.5)); // change to intakeCycleCmd
-      new JoystickButton(operator, 1).whileTrue(new ShooterCmd(shooterSub, 0.5));
-      new JoystickButton(operator, 3).whileTrue(new ClimbPIDcmd(climbSub, 9, 1)); // play with this to find out the correct constant for climb setpoint
-     // new JoystickButton(operator, 2).whileTrue(new ShooterPIDCmd(shooterSub, 0, getTX())); //PID with limelight
-     // new JoystickButton(operator, 4).whileTrue(new ClimbPIDcmd(climbSub, 90));
-    }*/
+  public void operatorControls(){
+      //new JoystickButton(operator, 0).whileTrue(new IntakeCmd(intakeSub, 0.5)); // change to intakeCycleCmd
+      //new JoystickButton(operator, 1).whileTrue(new ShooterCmd(shooterSub, 0.2, 0.2));
+      //new JoystickButton(operator, 3).whileTrue(new ManualClimbCmd(climbSub, 9)); // play with this to find out the correct constant for climb setpoint
+      //new JoystickButton(operator, 2).whileTrue(new TurretLimelightCmd(shooterSub, 0, getTX(9, 0.2, 0.2))); //PID with limelight
+      //new JoystickButton(operator, 4).whileTrue(new ManualClimbCmd(climbSub, -1));
+    }
 
   
 

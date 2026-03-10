@@ -199,6 +199,20 @@ public record ChoreoTraj(
 	    new Pose2d(14, 6, Rotation2d.fromRadians(0)),
 	    new Pose2d(15, 6, Rotation2d.fromRadians(0))
 	);
+	public static final ChoreoTraj p1tp2 = new ChoreoTraj(
+	    "p1tp2",
+	    OptionalInt.empty(),
+	    2.07642,
+	    new Pose2d(15.48, 2.1, Rotation2d.fromRadians(0)),
+	    new Pose2d(15.95, 7.4, Rotation2d.fromRadians(0))
+	);
+	public static final ChoreoTraj p2tp1 = new ChoreoTraj(
+	    "p2tp1",
+	    OptionalInt.empty(),
+	    2.00929,
+	    new Pose2d(15.95, 7.4, Rotation2d.fromRadians(0)),
+	    new Pose2d(15.48, 2.1, Rotation2d.fromRadians(0))
+	);
 
     /**
      * A map between trajectory names and their corresponding data.
@@ -229,7 +243,9 @@ public record ChoreoTraj(
 		Map.entry("s3tm1", s3tm1),
 		Map.entry("s3tm2", s3tm2),
 		Map.entry("s3tm3", s3tm3),
-		Map.entry("test", test)
+		Map.entry("test", test),
+		Map.entry("p1tp2", p1tp2),
+		Map.entry("p2tp1", p2tp1)
     );
 
     /**

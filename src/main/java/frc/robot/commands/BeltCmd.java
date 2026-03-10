@@ -1,20 +1,25 @@
 package frc.robot.commands;
 
 import edu.wpi.first.wpilibj2.command.Command;
-import frc.robot.subsystems.BeltSubsystem;
+import frc.robot.subsystems.ShooterSubsystem;
 
 public class BeltCmd extends Command{
-    private BeltSubsystem beltSub;
+    private ShooterSubsystem shooterSub;
     private double speed;
 
-    public BeltCmd(BeltSubsystem beltSub, double speed){
-        this.beltSub = beltSub;
+    public BeltCmd(ShooterSubsystem shooterSub, double speed){
+        this.shooterSub = shooterSub;
         this.speed = speed;
     }
 
     @Override
     public void execute() {
-        beltSub.setSpeed(speed);
+        shooterSub.setBeltSpeed(speed);
+    }
+
+    @Override
+    public void end(boolean interrupted) {
+        shooterSub.setBeltSpeed(0);
     }
 
 }

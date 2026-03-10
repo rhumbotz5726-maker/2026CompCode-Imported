@@ -26,17 +26,18 @@ public class TurretLimelightCmd extends Command{
 
     @Override
     public void initialize() {
-            controller.setSetpoint(setpoint);
+        controller.setSetpoint(setpoint);
     }
 
     @Override
     public void execute() {
         shooterSub.setTurretSpeed(controller.calculate(tx));
+        //shooterSub.setTurretSpeed(tx);
     }
 
     @Override
     public void end(boolean isFinished) {
-
+        shooterSub.setTurretSpeed(0);
     }
 
 }

@@ -13,7 +13,7 @@ public class ShooterSubsystem extends SubsystemBase{
     SparkMax shooterMotor = new SparkMax(11, MotorType.kBrushless); //Shoot
     SparkMax turretMotor = new SparkMax(12, MotorType.kBrushless); //Spin PID
     SparkMax beltMotor1 = new SparkMax(13, MotorType.kBrushless); //Belt
-    SparkMax beltMotor2 = new SparkMax(14, MotorType.kBrushless); //Belt
+    //SparkMax beltMotor2 = new SparkMax(14, MotorType.kBrushless); //Belt
 
     SparkAbsoluteEncoder encoder = turretMotor.getAbsoluteEncoder();
 
@@ -27,7 +27,7 @@ public class ShooterSubsystem extends SubsystemBase{
 
     public void setBeltSpeed(double speed) {
         beltMotor1.set(speed);
-        beltMotor2.set(speed);
+        //beltMotor2.set(speed);
     }
 
     public double getPos(){

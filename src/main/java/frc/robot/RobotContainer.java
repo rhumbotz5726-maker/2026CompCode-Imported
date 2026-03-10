@@ -18,7 +18,6 @@ import frc.robot.commands.IntakeCmd;
 import frc.robot.commands.ShooterCmd;
 import frc.robot.commands.TurretLimelightCmd;
 import frc.robot.commands.teleop.ManualClimbCmd;
-import frc.robot.subsystems.BeltSubsystem;
 import frc.robot.subsystems.ClimbSubsystem;
 import frc.robot.subsystems.DriverSub;
 import frc.robot.subsystems.Drivesubsystem;
@@ -36,7 +35,7 @@ public class RobotContainer {
 
   public static final Drivesubsystem driveSub = new Drivesubsystem();
   //private final BeltSubsystem beltSub = new BeltSubsystem();
-  private final IntakeSubsystem intakeSub = new IntakeSubsystem();
+  public final IntakeSubsystem intakeSub = new IntakeSubsystem();
   //private final ClimbSubsystem climbSub = new ClimbSubsystem();
   private final ShooterSubsystem shooterSub = new ShooterSubsystem();
   //Autos autos = new Autos(driveSub, shooterSub, climbSub);
@@ -99,7 +98,7 @@ public class RobotContainer {
 
   public void operatorControls(){
       //new JoystickButton(operator, 0).whileTrue(new IntakeCmd(intakeSub, 0.5)); // change to intakeCycleCmd
-      //new JoystickButton(operator, 1).whileTrue(new ShooterCmd(shooterSub, 0.2, 0.2));
+      //new JoystickButton(operator, 1).whileTrue(new ShooterCmd(shooterSub, 0.2));
       //new JoystickButton(operator, 3).whileTrue(new ManualClimbCmd(climbSub, 9)); // play with this to find out the correct constant for climb setpoint
       //new JoystickButton(operator, 2).whileTrue(new TurretLimelightCmd(shooterSub, 0, getTX(9, 0.2, 0.2))); //PID with limelight
       //new JoystickButton(operator, 4).whileTrue(new ManualClimbCmd(climbSub, -1));
@@ -129,7 +128,7 @@ public class RobotContainer {
     }
   }
 
-   public double getTX(int ID,double offset,double scale){
+  public double getTX(int ID,double offset,double scale){
     if(LimelightHelpers.getFiducialID("") == ID){
       return getTX(offset, scale);
     } else {

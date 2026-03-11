@@ -18,7 +18,7 @@ public class TurretLimelightCmd extends Command{
         this.setpoint = setpoint;
         this.tx = tx;
         this.controller = new PIDController(1, 0, 0);
-        this.controller.enableContinuousInput(stopPointA, stopPointB);
+        this.shooterSub.setTurrentVal(stopPointA, stopPointB);
     }
 
  
@@ -35,13 +35,13 @@ public class TurretLimelightCmd extends Command{
 
     @Override
     public void execute() {
-        shooterSub.setTurretSpeed(controller.calculate(tx));
+        shooterSub.setTurretSpeed(controller.calculate(tx), false);
         //shooterSub.setTurretSpeed(tx);
     }
 
     @Override
     public void end(boolean isFinished) {
-        shooterSub.setTurretSpeed(0);
+        shooterSub.setTurretSpeed(0,true);
     }
 
 }

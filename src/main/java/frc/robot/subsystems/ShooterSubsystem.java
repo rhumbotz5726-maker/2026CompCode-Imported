@@ -13,16 +13,34 @@ public class ShooterSubsystem extends SubsystemBase{
     SparkMax shooterMotor = new SparkMax(11, MotorType.kBrushless); //Shoot
     SparkMax turretMotor = new SparkMax(12, MotorType.kBrushless); //Spin PID
     SparkMax beltMotor1 = new SparkMax(13, MotorType.kBrushless); //Belt
-    
-
     SparkAbsoluteEncoder encoder = turretMotor.getAbsoluteEncoder();
+
+    double turretMax;
+    double turretMin;
+    double nullval =  -100;
+
+    public ShooterSubsystem(){
+        this.turretMax = nullval;
+        this.turretMin = nullval;
+    }
+
+    public void setTurrentVal(double max, double min){
+        this.turretMax = max;
+        this.turretMin = min;
+    }
 
     public void setShooterSpeed(double speed) {
         shooterMotor.set(speed);
     }
 
-    public void setTurretSpeed(double speed) {
-        turretMotor.set(speed);
+    public void setTurretSpeed(double speed,boolean override) {
+        if (turretMax == nullval || turretMin == nullval || override){
+            turretMotor.set(speed);
+        } else {
+            if(encoder.getPosition() > turretMax || encoder.getPosition() < turretMin){
+                turretMotor.set(0);
+            }
+        }
     }
 
     public void setBeltSpeed(double speed) {

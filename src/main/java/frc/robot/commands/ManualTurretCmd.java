@@ -18,12 +18,12 @@ public class ManualTurretCmd extends Command{
 
     @Override
     public void execute () {
-        shooterSub.setTurretSpeed(speed);
+        shooterSub.setTurretSpeed(speed,true);
     }
 
     @Override
     public void end (boolean interrupted) {
-        shooterSub.setTurretSpeed(0);
+        shooterSub.setTurretSpeed(0,true);
     }
 
 }

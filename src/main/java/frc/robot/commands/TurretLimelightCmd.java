@@ -9,12 +9,16 @@ public class TurretLimelightCmd extends Command{
     private double setpoint = 0; 
     private PIDController controller;
     private double tx;
+    double stopPointA = 1;
+    double stopPointB = 2;
+
 
     public TurretLimelightCmd (ShooterSubsystem shooterSub, double setpoint, double tx) {
         this.shooterSub = shooterSub;
         this.setpoint = setpoint;
         this.tx = tx;
         this.controller = new PIDController(1, 0, 0);
+        this.controller.enableContinuousInput(stopPointA, stopPointB);
     }
 
  

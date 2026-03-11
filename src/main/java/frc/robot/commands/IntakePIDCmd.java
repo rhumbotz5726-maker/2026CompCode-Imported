@@ -9,17 +9,19 @@ public class IntakePIDCmd extends Command{
     private IntakeSubsystem intakeSub;
     private double setpoint; 
     private PIDController controller;
-    private double tolerance = 0.05;
 
     public IntakePIDCmd(IntakeSubsystem intakeSub, double setpoint) {
         this.intakeSub = intakeSub;
         this.setpoint = setpoint;
-        this.controller = new PIDController(1, 0, 0);
+        this.controller = new PIDController(0.007, 0, 0);
+        controller.setTolerance(0.05);
+        controller.setSetpoint(setpoint);
     }
 
+
     @Override
-    public void initialize() {
-        controller.setSetpoint(setpoint);
+    public void initialize () {
+
     }
 
     @Override 
@@ -28,9 +30,9 @@ public class IntakePIDCmd extends Command{
     }
 
     @Override
-    public boolean isFinished() {
-        return Math.abs(intakeSub.getPos() - setpoint) < tolerance;
+    public void end(boolean isFinished) {
+        intakeSub.pidSetSpeed(0);
+        //super.end(isFinished);
     }
-
 
 }

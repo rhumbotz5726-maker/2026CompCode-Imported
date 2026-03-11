@@ -19,11 +19,12 @@ public class IntakeCmd extends Command{
 
     @Override
     public void execute() {
-        intakeSub.intakeSetSpeed(speed);
+        intakeSub.setIntakeSpeed(speed);
     }
 
     @Override
-    public void end(boolean interrupted) {
-
+    public void end(boolean isFinished) {
+        intakeSub.setIntakeSpeed(0);
     }
 }
+

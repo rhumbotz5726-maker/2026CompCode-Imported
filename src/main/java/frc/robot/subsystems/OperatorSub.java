@@ -1,16 +1,17 @@
-/*package frc.robot.subsystems;
+package frc.robot.subsystems;
 
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 
 public class OperatorSub extends SubsystemBase{
 
-    BeltSubsystem belt;
+   // BeltSubsystem belt;
     ClimbSubsystem climb;
     ShooterSubsystem shooterSubsystem;
 
 
-    public OperatorSub (BeltSubsystem belt, ClimbSubsystem climb, ShooterSubsystem shooterSubsystem){
-        this.belt = belt;
+    public OperatorSub (//BeltSubsystem belt,
+     ClimbSubsystem climb, ShooterSubsystem shooterSubsystem){
+       // this.belt = belt;
         this.climb = climb;
         this.shooterSubsystem = shooterSubsystem;
 
@@ -22,12 +23,12 @@ public class OperatorSub extends SubsystemBase{
 
     }
     public void moveBelt (double speed){
-        belt.setSpeed(speed);
+       // belt.setSpeed(speed);
         
     }
 
     public void moveTurret (double speed){
-        shooterSubsystem.setTurretSpeed(speed);
+        shooterSubsystem.setTurretSpeed(speed,true);
     }
     
-}*/
+}

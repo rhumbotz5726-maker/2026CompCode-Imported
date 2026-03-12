@@ -4,16 +4,11 @@
 
 package frc.robot;
 
-import choreo.auto.AutoFactory;
-import edu.wpi.first.math.MathUtil;
-import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj2.command.Command;
-import edu.wpi.first.wpilibj2.command.Commands;
 import edu.wpi.first.wpilibj2.command.RunCommand;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
-import frc.robot.Constants.OIConstants;
-import frc.robot.commands.BeltCmd;
+import frc.robot.Sequences.ShooterSequence;
 import frc.robot.commands.IntakeCmd;
 import frc.robot.commands.ShooterCmd;
 import frc.robot.commands.TurretLimelightCmd;
@@ -22,6 +17,7 @@ import frc.robot.subsystems.ClimbSubsystem;
 import frc.robot.subsystems.DriverSub;
 import frc.robot.subsystems.Drivesubsystem;
 import frc.robot.subsystems.IntakeSubsystem;
+import frc.robot.subsystems.OperatorSub;
 //import frc.robot.subsystems.OperatorSub;
 import frc.robot.subsystems.ShooterSubsystem;
 
@@ -32,15 +28,17 @@ public class RobotContainer {
   
   double deadband = 0.03;
   double slow = 3;
+  double slowOp = 3;
 
   public static final Drivesubsystem driveSub = new Drivesubsystem();
   //private final BeltSubsystem beltSub = new BeltSubsystem();
   public final IntakeSubsystem intakeSub = new IntakeSubsystem();
-  //private final ClimbSubsystem climbSub = new ClimbSubsystem();
+  private final ClimbSubsystem climbSub = new ClimbSubsystem();
   private final ShooterSubsystem shooterSub = new ShooterSubsystem();
-  //Autos autos = new Autos(driveSub, shooterSub, climbSub);
+  Autos autos = new Autos(driveSub, shooterSub, climbSub);
   private final DriverSub driverSub = new DriverSub(driveSub, intakeSub);
-  //private final OperatorSub operatorSub = new OperatorSub(beltSub, climbSub, shooterSub);
+  private final OperatorSub operatorSub = new OperatorSub(//beltSub, 
+  climbSub, shooterSub);
 
 
 
@@ -73,14 +71,15 @@ public class RobotContainer {
         //run command requirements
         driverSub));
 
-    /*operatorSub.setDefaultCommand(new RunCommand(
+    operatorSub.setDefaultCommand(new RunCommand(
       ()-> operatorSub.operatorControls(
         //belt
-        getAxis(operator, 4, deadband)/slow,
+        getAxis(operator, 4, deadband)/slowOp,
         //turret
-        getAxis(operator, 0, deadband)/slow),
+        getAxis(operator, 0, deadband)/slowOp
+        ),
         //run command requirements
-        operatorSub)); */
+        operatorSub)); 
 
   }
 
@@ -97,11 +96,17 @@ public class RobotContainer {
   }
 
   public void operatorControls(){
-      //new JoystickButton(operator, 0).whileTrue(new IntakeCmd(intakeSub, 0.5)); // change to intakeCycleCmd
-      //new JoystickButton(operator, 1).whileTrue(new ShooterCmd(shooterSub, 0.2));
-      //new JoystickButton(operator, 3).whileTrue(new ManualClimbCmd(climbSub, 9)); // play with this to find out the correct constant for climb setpoint
-      //new JoystickButton(operator, 2).whileTrue(new TurretLimelightCmd(shooterSub, 0, getTX(9, 0.2, 0.2))); //PID with limelight
-      //new JoystickButton(operator, 4).whileTrue(new ManualClimbCmd(climbSub, -1));
+
+      //Sequnce Buttons
+      new JoystickButton(operator, 0).whileTrue(ShooterSequence.getSeq()).whileFalse(ShooterSequence.getEndSeq());
+
+      //Single Operations Buttons
+      
+      new JoystickButton(operator, 0).whileTrue(new IntakeCmd(intakeSub, 0.5)); // change to intakeCycleCmd
+      new JoystickButton(operator, 3).whileTrue(new ManualClimbCmd(climbSub, 9)); // play with this to find out the correct constant for climb setpoint
+      new JoystickButton(operator, 2).whileTrue(new TurretLimelightCmd(shooterSub, 0, getTX(9, 0.2, 0.2))); //PID with limelight
+      new JoystickButton(operator, 4).whileTrue(new ManualClimbCmd(climbSub, -1));
+      
     }
 
   

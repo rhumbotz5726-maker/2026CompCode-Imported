@@ -22,7 +22,7 @@ public class TurretPIDCmd  extends Command {
 
     @Override
     public void execute() {
-        shooterSub.setTurretSpeed(controller.calculate(shooterSub.getPos()));
+        shooterSub.setTurretSpeed(controller.calculate(shooterSub.getPos()), false);
         //shooterSub.setTurretSpeed(controller.calculate(tx)); if limelight is possible
     }
 

@@ -11,7 +11,7 @@ public class TurretPIDCmd  extends Command {
 
     public TurretPIDCmd (ShooterSubsystem shooterSub, double setpoint) {
         this.shooterSub = shooterSub;
-        this.controller = new PIDController(1,0,0);
+        this.controller = new PIDController(0.05,0,0);
         this.setpoint = setpoint;
     }
 
@@ -28,6 +28,6 @@ public class TurretPIDCmd  extends Command {
 
     @Override
     public void end(boolean interrupted) {
-
+        shooterSub.setTurretSpeed(0.0, false);
     }
 }

@@ -7,16 +7,16 @@ public abstract class Sequences {
     
     Subsystem subsystem;
 
-    public static Command sequence;
-    public static Command endSeq;
+    public Command sequence;
+    public Command endSeq;
 
 
 
-    public static Command getSeq(){
+    public Command getSeq(){
         return sequence;
     }
 
-     public static Command getEndSeq(){
+     public Command getEndSeq(){
         return endSeq;
     }
 

@@ -37,6 +37,7 @@ public class ClimbSubsystem extends SubsystemBase{
         return encoder2.getPosition();
     }
 
+    @Override
     public void periodic() {
         SmartDashboard.putNumber("Climb encoder 1: ", getPosOne());
         SmartDashboard.putNumber("Climb encoder 2: ", getPosTwo());

@@ -10,7 +10,6 @@ import edu.wpi.first.wpilibj2.command.RunCommand;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 import frc.robot.Sequences.ShooterSequence;
 import frc.robot.commands.IntakeCmd;
-import frc.robot.commands.ShooterCmd;
 import frc.robot.commands.TurretLimelightCmd;
 import frc.robot.commands.teleop.ManualClimbCmd;
 import frc.robot.subsystems.ClimbSubsystem;
@@ -27,18 +26,20 @@ public class RobotContainer {
   XboxController operator = new XboxController(1);
   
   double deadband = 0.03;
-  double slow = 3;
+  double slow = 1.5;
   double slowOp = 3;
 
-  public static final Drivesubsystem driveSub = new Drivesubsystem();
+  public final Drivesubsystem driveSub = new Drivesubsystem();
   //private final BeltSubsystem beltSub = new BeltSubsystem();
   public final IntakeSubsystem intakeSub = new IntakeSubsystem();
   private final ClimbSubsystem climbSub = new ClimbSubsystem();
   private final ShooterSubsystem shooterSub = new ShooterSubsystem();
-  Autos autos = new Autos(driveSub, shooterSub, climbSub);
   private final DriverSub driverSub = new DriverSub(driveSub, intakeSub);
   private final OperatorSub operatorSub = new OperatorSub(//beltSub, 
   climbSub, shooterSub);
+
+  Autos autos = new Autos(driveSub, shooterSub, climbSub);
+
 
 
 
@@ -74,9 +75,9 @@ public class RobotContainer {
     operatorSub.setDefaultCommand(new RunCommand(
       ()-> operatorSub.operatorControls(
         //belt
-        getAxis(operator, 4, deadband)/slowOp,
+        0,
         //turret
-        getAxis(operator, 0, deadband)/slowOp
+        0
         ),
         //run command requirements
         operatorSub)); 
@@ -98,14 +99,16 @@ public class RobotContainer {
   public void operatorControls(){
 
       //Sequnce Buttons
-      new JoystickButton(operator, 0).whileTrue(ShooterSequence.getSeq()).whileFalse(ShooterSequence.getEndSeq());
+      new JoystickButton(operator, 1)
+      .whileTrue(new ShooterSequence(shooterSub,operator.getRawAxis(3),.25).getSeq())
+      .whileFalse(new ShooterSequence(shooterSub,0,0).getEndSeq());
 
       //Single Operations Buttons
       
-      new JoystickButton(operator, 0).whileTrue(new IntakeCmd(intakeSub, 0.5)); // change to intakeCycleCmd
+      new JoystickButton(operator, 2).whileTrue(new IntakeCmd(intakeSub, 0.5)); // change to intakeCycleCmd
       new JoystickButton(operator, 3).whileTrue(new ManualClimbCmd(climbSub, 9)); // play with this to find out the correct constant for climb setpoint
-      new JoystickButton(operator, 2).whileTrue(new TurretLimelightCmd(shooterSub, 0, getTX(9, 0.2, 0.2))); //PID with limelight
-      new JoystickButton(operator, 4).whileTrue(new ManualClimbCmd(climbSub, -1));
+      new JoystickButton(operator, 4).whileTrue(new TurretLimelightCmd(shooterSub, 0, getTX(9, 0.2, 0.2))); //PID with limelight
+      new JoystickButton(operator, 5).whileTrue(new ManualClimbCmd(climbSub, -1));
       
     }
 
@@ -113,7 +116,7 @@ public class RobotContainer {
 
   public Command getAutonomousCommand() {
    // return autos.test("s2tm2") ; 
-    return null;
+    return autos.shootOnly();
   }
 
   

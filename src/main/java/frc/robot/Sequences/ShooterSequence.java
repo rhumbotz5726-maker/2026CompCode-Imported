@@ -7,19 +7,17 @@ import frc.robot.subsystems.ShooterSubsystem;
 public class ShooterSequence extends Sequences{
    
 
-    public ShooterSequence(ShooterSubsystem shooterSubsystem){
+    public ShooterSequence(ShooterSubsystem shooterSubsystem, double shootSpeed, double beltSpeed){
         this.subsystem = shooterSubsystem;
-
-
 
         sequence = Commands.sequence(
 
-            Commands.runOnce(()-> ((ShooterSubsystem) subsystem).setShooterSpeed(1), 
+            Commands.runOnce(()-> ((ShooterSubsystem) subsystem).setShooterSpeed(shootSpeed), 
             subsystem),
 
             new WaitCommand(0.5),
 
-            Commands.runOnce(()-> ((ShooterSubsystem) subsystem).setBeltSpeed(1), 
+            Commands.runOnce(()-> ((ShooterSubsystem) subsystem).setBeltSpeed(beltSpeed), 
             subsystem)
 
         );

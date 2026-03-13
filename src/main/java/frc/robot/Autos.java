@@ -1,35 +1,24 @@
 package frc.robot;
 
-import java.util.Optional;
-
-import choreo.Choreo;
 import choreo.auto.AutoFactory;
-import choreo.trajectory.SwerveSample;
-import choreo.trajectory.Trajectory;
-import edu.wpi.first.math.geometry.Pose2d;
-import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.Commands;
-import edu.wpi.first.wpilibj2.command.PrintCommand;
-import edu.wpi.first.wpilibj2.command.RunCommand;
-import edu.wpi.first.wpilibj2.command.Subsystem;
 import frc.robot.commands.auto.TimeClimb;
 import frc.robot.commands.auto.TurretPIDCmd;
-import frc.robot.commands.IntakeCmd;
-import frc.robot.commands.TurretLimelightCmd;
+import frc.robot.Sequences.ShooterSequence;
 import frc.robot.subsystems.ClimbSubsystem;
 import frc.robot.subsystems.Drivesubsystem;
 import frc.robot.subsystems.ShooterSubsystem;
 
 public class Autos {
-    public static Drivesubsystem driveSub;
-    public static ShooterSubsystem shooterSub;
-    public static ClimbSubsystem climbSub;
+    public  Drivesubsystem driveSub;
+    public  ShooterSubsystem shooterSub;
+    public  ClimbSubsystem climbSub;
 
-    public Autos(Drivesubsystem drivesubsystem, ShooterSubsystem shooterSub, ClimbSubsystem climbSub){
-        this.driveSub = drivesubsystem;
-        this.shooterSub = shooterSub;
-        this.climbSub = climbSub;
+    public Autos(Drivesubsystem drivesubsystem, ShooterSubsystem shooterSub2, ClimbSubsystem climbSub2){
+        driveSub = drivesubsystem;
+        shooterSub = shooterSub2;
+        climbSub = climbSub2;
     }
   
     AutoFactory autoFactory =new AutoFactory(
@@ -62,13 +51,20 @@ public class Autos {
     }
 
     public Command test(String name){
-        
-    
         return Commands.sequence(
               autoFactory.resetOdometry(name),
               autoFactory.trajectoryCmd(name)
             );
     }
+
+
+    public Command shootOnly(){
+        return Commands.sequence(
+        new TurretPIDCmd(shooterSub, 0.5), 
+        new ShooterSequence(shooterSub,1,.5).getSeq(), 
+        new ShooterSequence(shooterSub, 0, 0).endSeq);
+    }
+
      public Command shoot(String start, String mid){
         autoFactory.resetOdometry(start + "t" + mid);
         return Commands.sequence(

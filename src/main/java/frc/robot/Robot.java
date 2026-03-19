@@ -58,9 +58,8 @@ public class Robot extends TimedRobot {
     if (m_autonomousCommand != null) {
       CommandScheduler.getInstance().cancel(m_autonomousCommand);
       m_autonomousCommand.cancel();
-
-      m_robotContainer.intakeSub.resetEncoder();
     }
+    m_robotContainer.intakeSub.resetEncoder();
   }
 
   @Override

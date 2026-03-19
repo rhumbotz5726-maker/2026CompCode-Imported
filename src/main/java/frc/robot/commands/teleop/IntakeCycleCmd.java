@@ -4,38 +4,36 @@ import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.Commands;
 import frc.robot.commands.*;
 import frc.robot.Constants;
+import frc.robot.subsystems.IndexerSubsystem;
 import frc.robot.subsystems.IntakeSubsystem;
 
 public class IntakeCycleCmd extends Command {
     private IntakeSubsystem intakeSub;
+    private IndexerSubsystem indexerSub;
+    private double intakeSpeed; 
+    private double indexerSpeed;
 
-    public IntakeCycleCmd(IntakeSubsystem intakeSub){
+    public IntakeCycleCmd(IntakeSubsystem intakeSub, IndexerSubsystem indexerSub, double intakeSpeed, double indexerSpeed){
             this.intakeSub = intakeSub;
+            this.indexerSub = indexerSub;
+            this.intakeSpeed = intakeSpeed;
+            this.indexerSpeed = indexerSpeed;
     }
 
     @Override
     public void initialize() {
-        Commands.runOnce(
-            ()-> {Commands.sequence(
-                    new IntakePIDCmd(intakeSub, Constants.intakeConstants.INTAKE_EXTEND_SETPOINT));}, 
-                intakeSub);
+
     }
 
     @Override
     public void execute() {
-        Commands.runOnce(()-> {Commands.sequence(
-                    new IntakePIDCmd(intakeSub, Constants.intakeConstants.INTAKE_EXTEND_SETPOINT));}, 
-                intakeSub);
-        new IntakeCmd(intakeSub, 0.8);
+        intakeSub.setIntakeSpeed(intakeSpeed);
+        indexerSub.setSpeed(indexerSpeed);
     }
 
     @Override
     public void end(boolean interrupted) {
-        Commands.runOnce(
-            ()-> {Commands.sequence(
-                    new IntakeCmd(intakeSub, 0),
-                    new IntakePIDCmd(intakeSub, Constants.intakeConstants.INTAKE_PUTBACKf_SETPOINT));}, 
-                intakeSub);
+        intakeSub.setIntakeSpeed(0.0);
+        indexerSub.setSpeed(0.0);
     }
-    
 }

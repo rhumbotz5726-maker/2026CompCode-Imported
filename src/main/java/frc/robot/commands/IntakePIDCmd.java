@@ -7,15 +7,15 @@ import frc.robot.subsystems.IntakeSubsystem;
 public class IntakePIDCmd extends Command{
     
     private IntakeSubsystem intakeSub;
-    private double setpoint; 
+    //private double setpoint; 
     private PIDController controller;
 
     public IntakePIDCmd(IntakeSubsystem intakeSub, double setpoint) {
         this.intakeSub = intakeSub;
-        this.setpoint = setpoint;
-        this.controller = new PIDController(0.007, 0, 0);
-        controller.setTolerance(0.05);
+        this.controller = new PIDController(0.01, 0.0, 0.0);
+        controller.setTolerance(0.5);
         controller.setSetpoint(setpoint);
+        addRequirements(intakeSub);
     }
 
 

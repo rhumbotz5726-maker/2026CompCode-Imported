@@ -15,13 +15,43 @@ import edu.wpi.first.math.kinematics.SwerveDriveKinematics;
 import edu.wpi.first.math.kinematics.SwerveDriveOdometry;
 import edu.wpi.first.math.kinematics.SwerveModulePosition;
 import edu.wpi.first.math.kinematics.SwerveModuleState;
+import edu.wpi.first.networktables.NetworkTableInstance;
+import edu.wpi.first.networktables.StructArrayEntry;
+import edu.wpi.first.networktables.StructArrayPublisher;
+import edu.wpi.first.util.sendable.Sendable;
+import edu.wpi.first.util.sendable.SendableBuilder;
+import edu.wpi.first.util.struct.Struct;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants;
 import frc.robot.Constants.DriveConstants;
 
 public class Drivesubsystem extends SubsystemBase{
+
+
     // Declaring variables (definining our building materials)
+
+     Sendable swerve = new Sendable() {
+                @Override
+                public void initSendable(SendableBuilder builder) {
+                    builder.setSmartDashboardType("SwerveDrive");
+
+                    builder.addDoubleProperty("Front Left Angle",() -> frontLeft.getState().angle.getRadians(), null);
+                    builder.addDoubleProperty("Front Left Velocity", () -> frontLeft.getState().speedMetersPerSecond, null);
+
+                    builder.addDoubleProperty("Front Right Angle",() -> frontRight.getState().angle.getRadians(), null);
+                    builder.addDoubleProperty("Front Right Velocity", () -> frontRight.getState().speedMetersPerSecond, null);
+
+
+                    builder.addDoubleProperty("Back Left Angle",() -> rearLeft.getState().angle.getRadians(), null);
+                    builder.addDoubleProperty("Back Left Velocity", () -> rearLeft.getState().speedMetersPerSecond, null);
+
+
+                    builder.addDoubleProperty("Back Right Angle",() -> rearRight.getState().angle.getRadians(), null);
+                    builder.addDoubleProperty("Back Right Velocity", () -> rearRight.getState().speedMetersPerSecond, null);
+
+    
+                    builder.addDoubleProperty("Robot Angle", () -> Math.toRadians(getHeading()), null);}};
     public final SwerveModule frontLeft = new SwerveModule(
         DriveConstants.kFrontLeftDrivingCanId,
         DriveConstants.kFrontLeftTurningCanId,
@@ -65,12 +95,16 @@ public class Drivesubsystem extends SubsystemBase{
         //gets called every 30ms
         @Override
         public void periodic() {
+        
             odometry.update(
             Rotation2d.fromDegrees(gyro.getAngle()), 
             getSwervePos()
             );
+       
+            SmartDashboard.putData("Swerve Drive", swerve);
             SmartDashboard.putNumber("Robot Heading ", getHeading());
             SmartDashboard.putString("pose",""+ getPose());
+            
         }
 
 
@@ -88,7 +122,7 @@ public class Drivesubsystem extends SubsystemBase{
         double xSpeedDelivered = xSpeed * DriveConstants.kMaxSpeedMetersPerSecond;
         double ySpeedDelivered = ySpeed * DriveConstants.kMaxSpeedMetersPerSecond;
         double rotDelivered = rot * DriveConstants.kMaxAngularSpeed;
-
+        
         var swerveModuleStates = DriveConstants.kDriveKinematics.toSwerveModuleStates(
             fieldRelative
             //For the gyro to work you need to invert the gyro calling then you are good to go  
@@ -170,11 +204,11 @@ public class Drivesubsystem extends SubsystemBase{
 //---------------------------------------------------------------------------------
 //      Rotation/Heading related getters
         public double getHeading() {
-            return Math.IEEEremainder(gyro.getAngle(), 360);
+            return Rotation2d.fromDegrees(gyro.getAngle()).getDegrees();
         }
 
         public double getTurnRate() {
-            return -gyro.getRate() * (DriveConstants.kGyroReversed ? -1.0 : 1.0);
+            return gyro.getRate() * (DriveConstants.kGyroReversed ? -1.0 : 1.0);
         }
 
         public Rotation2d geRotation2d() {
@@ -210,6 +244,7 @@ public class Drivesubsystem extends SubsystemBase{
         // Get the current pose of the robot
         Pose2d pose = getPose();
         SmartDashboard.putString("sample", "" + sample.omega);
+        
         // Generate the next speeds for the robot
         ChassisSpeeds speeds = new ChassisSpeeds(
             sample.vx + xController.calculate(pose.getX(), sample.x),

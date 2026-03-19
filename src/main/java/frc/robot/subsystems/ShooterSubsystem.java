@@ -42,7 +42,8 @@ public class ShooterSubsystem extends SubsystemBase{
         }
     }
 
-    public void setBeltSpeed(double speed) {
+    public void 
+    setBeltSpeed(double speed) {
         beltMotor1.set(speed);
     }
 

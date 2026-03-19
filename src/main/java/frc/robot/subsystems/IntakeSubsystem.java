@@ -23,7 +23,7 @@ public class IntakeSubsystem extends SubsystemBase{
     
     public IntakeSubsystem(){
         config.idleMode(IdleMode.kBrake);
-        intakeMotor.configure(config, com.revrobotics.spark.SparkBase.ResetMode.kResetSafeParameters, PersistMode.kPersistParameters);
+        pidMotor.configure(config, com.revrobotics.spark.SparkBase.ResetMode.kResetSafeParameters, PersistMode.kPersistParameters);
 
     }
 
@@ -40,8 +40,7 @@ public class IntakeSubsystem extends SubsystemBase{
     }
 
     public void resetEncoder() {
-       // encoder.reset();
-       encoder.setPosition(0);
+       encoder.setPosition(0.0);
     }
 
     @Override

@@ -5,6 +5,7 @@ import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.Commands;
 import frc.robot.commands.auto.TimeClimb;
 import frc.robot.commands.auto.TurretPIDCmd;
+import frc.robot.commands.auto.timeshoot;
 import frc.robot.Sequences.ShooterSequence;
 import frc.robot.subsystems.ClimbSubsystem;
 import frc.robot.subsystems.Drivesubsystem;
@@ -14,14 +15,13 @@ public class Autos {
     public  Drivesubsystem driveSub;
     public  ShooterSubsystem shooterSub;
     public  ClimbSubsystem climbSub;
+    public AutoFactory autoFactory;
 
     public Autos(Drivesubsystem drivesubsystem, ShooterSubsystem shooterSub2, ClimbSubsystem climbSub2){
         driveSub = drivesubsystem;
         shooterSub = shooterSub2;
         climbSub = climbSub2;
-    }
-  
-    AutoFactory autoFactory =new AutoFactory(
+         autoFactory =new AutoFactory(
     //these are method pointers they basically tell the code "Hey the method you want is right here"
         driveSub::getPose,
         driveSub::resetOdometry,
@@ -29,14 +29,23 @@ public class Autos {
         false, 
         driveSub
     );
+    }
+  
+    
 
     //this will be an example for like the lineup n stuff
     public Command midToLineup(){
         return Commands.sequence(
         autoFactory.resetOdometry("go to middle"),
          new TurretPIDCmd(shooterSub, 90),
-        autoFactory.resetOdometry("go back to start"),
-        Commands.runOnce(() -> System.out.println("reset")));
+        autoFactory.resetOdometry("go back to start")
+        );
+    }
+
+    public Command backupAndShoot(String start, String mid){
+        return Commands.sequence(
+            autoFactory.trajectoryCmd(start + "t" + mid),
+            new timeshoot(shooterSub,19)          );
     }
 
 

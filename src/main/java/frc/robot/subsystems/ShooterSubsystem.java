@@ -14,6 +14,17 @@ public class ShooterSubsystem extends SubsystemBase{
     SparkMax beltMotor1 = new SparkMax(13, MotorType.kBrushless); //Belt
     SparkAbsoluteEncoder encoder = turretMotor.getAbsoluteEncoder();
 
+    public static final double torque = 1;
+    public static final double COF = 1;
+    public static final double Mass = 1;
+    public static final double angle = 1;
+    
+    public static final double force = COF*torque;
+    public static final double accel = force/Mass;
+    public static final double velAt1Sec = accel*1;
+
+    public static final double distance = (velAt1Sec*velAt1Sec)*Math.sin(2*angle)/(-9.8);
+    
     double turretMax;
     double turretMin;
     double nullval =  -100;

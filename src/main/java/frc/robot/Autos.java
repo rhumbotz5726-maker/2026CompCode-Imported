@@ -1,5 +1,7 @@
 package frc.robot;
 
+import java.time.temporal.Temporal;
+
 import choreo.auto.AutoFactory;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.Commands;
@@ -42,10 +44,10 @@ public class Autos {
         );
     }
 
-    public Command backupAndShoot(String start, String mid){
+    public Command backupAndShoot(String start, String mid,double time){
         return Commands.sequence(
             autoFactory.trajectoryCmd(start + "t" + mid),
-            new timeshoot(shooterSub,19)          );
+            new timeshoot(shooterSub,time));
     }
 
 

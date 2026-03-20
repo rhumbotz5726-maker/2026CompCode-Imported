@@ -21,12 +21,8 @@ public class ClimbSubsystem extends SubsystemBase{
         climbMotor2.set(speed);
     }
 
-    public void setSpeed(int motorNumber, double speed) {
-        if (motorNumber == 1) {
-            climbMotor1.set(speed);
-        } else if (motorNumber == 2) {
-            climbMotor2.set(speed);
-        }
+    public void setSpeed(double speed1, double speed) {
+       
     }
 
     public double getPosOne() {

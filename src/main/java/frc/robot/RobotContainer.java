@@ -88,11 +88,6 @@ public class RobotContainer {
         driver.getRawButton(6)),
         //run command requirements
         driverSub));
-      /* 
-      intakeSub.setDefaultCommand(
-        IntakeLogic(operator.getRawButton(8))
-      );
-      */
 
   }
 
@@ -115,14 +110,18 @@ public class RobotContainer {
       //Single Operations Buttons
       
       //new JoystickButton(operator, 3).whileTrue(new IntakeCmd(intakeSub, 0.5)); // change to intakeCycleCmd
-      new JoystickButton(operator, 6).whileTrue(new IntakeCycleCmd(intakeSub, indexerSub, -0.55, -0.6)); // change to intakeCycleCmd
-      new JoystickButton(operator, 2).whileTrue(new manIntake(intakeSub, -0.1));
-      new JoystickButton(operator, 3).whileTrue(new manIntake(intakeSub, 0.1));
-      new JoystickButton(operator, 4).whileTrue(new ShooterCmd(shooterSub, 0.6));
-      new JoystickButton(operator, 7).whileTrue(new BeltCmd(shooterSub, indexerSub, 1.0, -0.6));
-      //new JoystickButton(operator, 5).whileTrue(new IntakeCmd(intakeSub, 0.5));
+    
+      //new JoystickButton(operator, 2).whileTrue(new manIntake(intakeSub, -0.1));
+      //new JoystickButton(operator, 3).whileTrue(new manIntake(intakeSub, 0.1));
+      
+      new JoystickButton(operator, 1).whileTrue(new ManualClimbCmd(climbSub, 1, -1));
+      new JoystickButton(operator, 2).whileTrue(new ManualClimbCmd(climbSub, -1, 1));
 
-      //new JoystickButton(operator, 1).whileTrue(new ManualClimbCmd(climbSub, 1, -1, 0));
+      new JoystickButton(operator, 4).whileTrue(new ShooterCmd(shooterSub, 0.6));
+      //new JoystickButton(operator, 5).whileTrue(new IntakeCmd(intakeSub, 0.5)); 
+      new JoystickButton(operator, 6).whileTrue(new IntakeCycleCmd(intakeSub, indexerSub, -0.55, -0.6));
+      new JoystickButton(operator, 7).whileTrue(new BeltCmd(shooterSub, indexerSub, 1.0, -0.6));
+
       //new JoystickButton(operator, 2).whileTrue(new ManualClimbCmd(climbSub, 1, 1, 0));
       //new JoystickButton(operator, 3).whileTrue(new ManualClimbCmd(climbSub, 2, 0, 1));
       //new JoystickButton(operator, 4).whileTrue(new ManualClimbCmd(climbSub, 2, 0, -1));
@@ -174,18 +173,6 @@ public class RobotContainer {
       return  -(LimelightHelpers.getTX("")+offset) * scale ;
     }
   }
-
-  public Command IntakeLogic(boolean up){
-    if(up){
-      //up position
-      return new IntakePIDCmd(intakeSub, 0);
-    } else {
-      //down position
-      return new IntakePIDCmd(intakeSub,22.5);
-    }
-  }
-
-
 
   //un implemented
 

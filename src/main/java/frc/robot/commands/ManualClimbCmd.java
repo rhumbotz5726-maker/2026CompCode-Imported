@@ -5,16 +5,14 @@ import frc.robot.subsystems.ClimbSubsystem;
 
 public class ManualClimbCmd extends Command{
 
-    private int motorNumber;
     private double speedOne;
     private double speedTwo;
     private ClimbSubsystem climbSub;
 
-    public ManualClimbCmd(ClimbSubsystem climbSub, int motorNumber, double speedOne, double speedTwo){
+    public ManualClimbCmd(ClimbSubsystem climbSub, double speed1, double speed2){
         this.climbSub = climbSub;
-        this.speedOne = speedOne;
-        this.speedTwo = speedTwo;
-        this.motorNumber = motorNumber;
+        this.speedOne = speed1;
+        this.speedTwo = speed2;
     }
 
     @Override
@@ -24,19 +22,13 @@ public class ManualClimbCmd extends Command{
 
     @Override
     public void execute() {
-        if (motorNumber == 1) {
-            climbSub.setSpeed(1, speedOne);
-            
-        } else {
-            climbSub.setSpeed(2, speedTwo);
-        }
+            climbSub.setSpeed(speedOne,speedTwo);
         
     }
 
     @Override
     public void end(boolean interrupted) {
-        climbSub.setSpeed(1, 0);
-        climbSub.setSpeed(2, 0);
+        climbSub.setSpeed(0, 0);
     }
     
 }
